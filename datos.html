@@ -4,43 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datos | D4v1d</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/estilo.css">
 </head>
-<body>
+<body class="pagina-interior">
     <canvas id="fondoCanvas"></canvas>
     
-    <!-- BARRA DE HERRAMIENTAS RETRO -->
-    <div class="ventana-retro">
-        <!-- Barra de título -->
-        <div class="barra-titulo">
-            <span class="titulo-ventana">D4v1d.exe - Datos</span>
-            <div class="botones-ventana">
-                <span class="btn-min">_</span>
-                <span class="btn-max">□</span>
-                <span class="btn-close">X</span>
-            </div>
-        </div>
-        
-        <!-- Pestañas de navegación -->
-        <nav class="pestanas">
-            <a href="index.html" class="pestana">
-                <span class="icono-pestana">🏠</span> Inicio
-            </a>
-            <a href="proyectos.html" class="pestana">
-                <span class="icono-pestana">🎨</span> Proyectos
-            </a>
-            <a href="datos.html" class="pestana activa">
-                <span class="icono-pestana">📋</span> Datos
-            </a>
-        </nav>
-        
-        <!-- Contenido principal -->
-        <div class="contenido-ventana">
-            <h1 style="text-align:center; color:#3b82f6; margin-bottom:30px;">📋 Mis Datos</h1>
-            <div id="datos-personales" class="datos-container">
-                <!-- Se llena con JavaScript -->
-            </div>
-        </div>
+    <h1>📋 Mis Datos</h1>
+    
+    <nav class="menu">
+        <a href="index.html">🏠 Inicio</a>
+        <a href="proyectos.html">🎨 Proyectos</a>
+        <a href="datos.html">📋 Datos</a>
+    </nav>
+
+    <div id="datos-personales" class="datos-container">
+        <!-- Se llena con JavaScript -->
     </div>
 
     <script>
@@ -64,54 +43,5 @@
             });
     </script>
     <script src="js/particulas.js"></script>
-    <!-- CAPA DE TRANSICIÓN PIXELADA -->
-    <div class="transicion-pixel" id="transicionPixel"></div>
-
-    <script>
-        // Transición pixelada al cambiar de página
-        document.addEventListener('DOMContentLoaded', function() {
-            const capaTransicion = document.getElementById('transicionPixel');
-            
-            // Al hacer clic en cualquier enlace interno
-            document.querySelectorAll('a[href]').forEach(enlace => {
-                // Solo enlaces internos (mismo origen)
-                if (enlace.hostname === window.location.hostname || enlace.hostname === '') {
-                    enlace.addEventListener('click', function(e) {
-                        const href = this.getAttribute('href');
-                        // Evitar enlaces a anclas o javascript
-                        if (href && href !== '#' && !href.startsWith('javascript') && !href.startsWith('mailto')) {
-                            e.preventDefault();
-                            
-                            // Activar transición
-                            capaTransicion.classList.add('activa');
-                            
-                            // Crear píxeles cayendo
-                            for (let i = 0; i < 50; i++) {
-                                setTimeout(() => {
-                                    const pixel = document.createElement('div');
-                                    pixel.className = 'pixel-cayendo';
-                                    pixel.style.left = Math.random() * 100 + '%';
-                                    pixel.style.width = (Math.random() * 6 + 2) + 'px';
-                                    pixel.style.height = (Math.random() * 6 + 2) + 'px';
-                                    pixel.style.animationDelay = Math.random() * 0.3 + 's';
-                                    pixel.style.backgroundColor = Math.random() > 0.5 ? '#3b82f6' : '#e63946';
-                                    document.body.appendChild(pixel);
-                                    
-                                    // Eliminar pixel después de la animación
-                                    setTimeout(() => pixel.remove(), 1000);
-                                }, i * 15);
-                            }
-                            
-                            // Navegar a la nueva página después de la animación
-                            setTimeout(() => {
-                                window.location.href = href;
-                            }, 500);
-                        }
-                    });
-                }
-            });
-        });
-    </script>
-</body>
 </body>
 </html>
