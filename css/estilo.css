@@ -40,15 +40,15 @@ body {
 }
 
 .nombre {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: #3b82f6;
-    text-shadow: 0 0 10px #3b82f6, 0 0 20px #3b82f6;
+    text-shadow: 0 0 10px #3b82f6, 0 0 20px #3b82f6, 0 0 40px #3b82f6;
     margin-bottom: 20px;
     animation: flicker 3s infinite alternate;
 }
 
 .subtitulo {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: #e63946;
     margin-bottom: 40px;
     text-shadow: 2px 2px 0px #000;
@@ -67,7 +67,7 @@ body {
     color: #ffffff;
     text-decoration: none;
     font-size: 0.7rem;
-    padding: 10px 20px;
+    padding: 15px 25px;
     border: 2px solid #3b82f6;
     background-color: rgba(10, 10, 10, 0.8);
     transition: all 0.3s;
@@ -76,7 +76,7 @@ body {
 .menu a:hover {
     background-color: #3b82f6;
     color: #0a0a0a;
-    box-shadow: 0 0 15px #3b82f6;
+    box-shadow: 0 0 20px #3b82f6;
     transform: scale(1.1);
 }
 
@@ -84,9 +84,11 @@ body {
 @keyframes flicker {
     0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
         opacity: 1;
+        text-shadow: 0 0 10px #3b82f6, 0 0 20px #3b82f6, 0 0 40px #3b82f6;
     }
     20%, 24%, 55% {
-        opacity: 0.5;
+        opacity: 0.7;
+        text-shadow: 0 0 5px #3b82f6, 0 0 10px #3b82f6;
     }
 }
 
@@ -216,7 +218,11 @@ body {
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
     .nombre {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+    }
+    
+    .subtitulo {
+        font-size: 0.6rem;
     }
     
     .menu {
@@ -232,246 +238,5 @@ body {
     
     .galeria {
         grid-template-columns: 1fr;
-    }
-}
-/* ===== BARRA DE HERRAMIENTAS RETRO ===== */
-.ventana-retro {
-    position: relative;
-    max-width: 1100px;
-    margin: 20px auto;
-    background-color: #1a1a2e;
-    border: 3px solid #3b82f6;
-    box-shadow: 
-        inset 0 0 0 2px #0a0a0a,
-        0 0 20px rgba(59, 130, 246, 0.4),
-        8px 8px 0px #000000;
-    min-height: 90vh;
-}
-
-/* Barra de título */
-.barra-titulo {
-    background: linear-gradient(90deg, #1e3a8a, #3b82f6);
-    padding: 8px 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #0a0a0a;
-    cursor: default;
-}
-
-.titulo-ventana {
-    font-size: 0.6rem;
-    color: #ffffff;
-    text-shadow: 2px 2px 0px #000000;
-    letter-spacing: 1px;
-}
-
-.botones-ventana {
-    display: flex;
-    gap: 6px;
-}
-
-.btn-min, .btn-max, .btn-close {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    background-color: #0a0a0a;
-    color: #ffffff;
-    text-align: center;
-    line-height: 22px;
-    font-size: 0.7rem;
-    font-family: 'Press Start 2P', monospace;
-    border: 2px solid #3b82f6;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.btn-min:hover { background-color: #3b82f6; color: #000; }
-.btn-max:hover { background-color: #3b82f6; color: #000; }
-.btn-close:hover { background-color: #e63946; border-color: #e63946; color: #fff; }
-
-/* Pestañas de navegación */
-.pestanas {
-    display: flex;
-    background-color: #0d0d1a;
-    border-bottom: 2px solid #3b82f6;
-    padding: 0;
-    gap: 0;
-}
-
-.pestana {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 12px 20px;
-    background-color: #12122a;
-    color: #888888;
-    text-decoration: none;
-    font-size: 0.55rem;
-    border-right: 2px solid #3b82f6;
-    border-bottom: 3px solid transparent;
-    transition: all 0.2s;
-    position: relative;
-    cursor: pointer;
-}
-
-.pestana:hover {
-    background-color: #1a1a3e;
-    color: #ffffff;
-    text-shadow: 0 0 8px #3b82f6;
-}
-
-.pestana.activa {
-    background-color: #1e3a8a;
-    color: #ffffff;
-    border-bottom: 3px solid #e63946;
-    box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.5);
-    text-shadow: 0 0 5px #ffffff;
-}
-
-.pestana.activa::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #e63946;
-    animation: brillo-pestana 1.5s infinite;
-}
-
-.icono-pestana {
-    font-size: 0.9rem;
-}
-
-/* Contenido de la ventana */
-.contenido-ventana {
-    padding: 30px;
-    background-color: #0a0a0a;
-    min-height: 70vh;
-}
-
-/* Animación de brillo en pestaña activa */
-@keyframes brillo-pestana {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-/* Efecto hover en pestañas */
-.pestana:active {
-    transform: scale(0.97);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .ventana-retro {
-        margin: 10px;
-    }
-    
-    .pestanas {
-        flex-wrap: wrap;
-    }
-    
-    .pestana {
-        flex: 1 1 auto;
-        justify-content: center;
-        padding: 10px;
-        font-size: 0.5rem;
-    }
-    
-    .contenido-ventana {
-        padding: 15px;
-    }
-    
-    .barra-titulo {
-        padding: 6px 10px;
-    }
-    
-    .titulo-ventana {
-        font-size: 0.5rem;
-    }
-}
-/* ===== SCANLINES CRT ===== */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.08) 0px,
-        rgba(0, 0, 0, 0.08) 2px,
-        transparent 2px,
-        transparent 4px
-    );
-    pointer-events: none;
-    z-index: 998;
-    animation: scanline-move 8s linear infinite;
-}
-
-@keyframes scanline-move {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 4px; }
-}
-
-/* ===== TRANSICIÓN PIXELADA ENTRE PÁGINAS ===== */
-.transicion-pixel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #0a0a0a;
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.1s;
-}
-
-.transicion-pixel.activa {
-    opacity: 1;
-    animation: pixel-fall 0.6s ease-in forwards;
-}
-
-@keyframes pixel-fall {
-    0% {
-        clip-path: inset(0 0 100% 0);
-    }
-    20% {
-        clip-path: inset(0 0 80% 0);
-    }
-    40% {
-        clip-path: inset(0 0 60% 0);
-    }
-    60% {
-        clip-path: inset(0 0 40% 0);
-    }
-    80% {
-        clip-path: inset(0 0 20% 0);
-    }
-    100% {
-        clip-path: inset(0 0 0% 0);
-    }
-}
-
-/* Píxeles que caen */
-.pixel-cayendo {
-    position: fixed;
-    background-color: #3b82f6;
-    pointer-events: none;
-    z-index: 10000;
-    animation: caer 0.8s linear forwards;
-}
-
-@keyframes caer {
-    0% {
-        transform: translateY(-10px);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(110vh);
-        opacity: 0;
     }
 }
