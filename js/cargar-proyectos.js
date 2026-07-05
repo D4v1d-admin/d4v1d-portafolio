@@ -1,5 +1,5 @@
 // Cargar proyectos desde el archivo JSON
-fetch('../data/proyectos.json')
+fetch('data/proyectos.json')
     .then(respuesta => respuesta.json())
     .then(proyectos => {
         const contenedor = document.getElementById('lista-proyectos');
