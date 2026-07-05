@@ -121,9 +121,8 @@ body {
 
 /* === PÁGINAS INTERIORES === */
 .pagina-interior {
-    padding: 40px 20px;
+    padding: 80px 20px 40px 20px;
 }
-
 .pagina-interior h1 {
     text-align: center;
     color: #3b82f6;
