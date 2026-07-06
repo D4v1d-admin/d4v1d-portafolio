@@ -92,7 +92,7 @@ body {
 .menu a:hover {
     background-color: #1a1a3e;
     color: #ffffff;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     border-bottom: 4px solid #3b82f6;
     text-shadow: 0 0 8px #3b82f6;
 }
@@ -101,7 +101,7 @@ body {
 .menu a.activa {
     background-color: #1e3a8a;
     color: #ffffff;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     font-weight: bold;
     border-bottom: 4px solid #e63946;
     box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.4);
@@ -252,14 +252,15 @@ body {
         font-size: 0.6rem;
     }
     
-    .menu a {
-        font-size: 0.55rem;
+        .menu a {
+        font-size: 0.65rem;
         padding: 12px 15px;
+        margin: 0 3px;
     }
     
     .menu a:hover,
     .menu a.activa {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
     }
     
     .galeria {
