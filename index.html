@@ -22,13 +22,16 @@
     </header>
 
     <script src="js/particulas.js"></script>
-    <!-- Atajo secreto: Ctrl + Alt + D para ir al panel admin -->
+    <!-- Triple clic secreto en el nombre para ir al panel admin -->
 <script>
-    document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && e.altKey && e.key === 'd') {
-            e.preventDefault();
+    let contador = 0;
+    document.querySelector('.nombre').addEventListener('click', function() {
+        contador++;
+        if (contador >= 3) {
+            contador = 0;
             window.location.href = 'admin.html';
         }
+        setTimeout(() => { contador = 0; }, 1000);
     });
 </script>
 </body>
