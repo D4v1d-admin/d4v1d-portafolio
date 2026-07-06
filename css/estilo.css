@@ -37,16 +37,17 @@ body {
     align-items: center;
     height: calc(100vh - 55px);
     text-align: center;
-    padding: 80px 20px 20px 20px;
+    padding: 40px 20px 20px 20px;
 }
 
 .nombre {
-    font-size: 4.5rem;
+    font-size: 6rem;
     color: #3b82f6;
-    text-shadow: 0 0 15px #3b82f6, 0 0 30px #3b82f6, 0 0 60px #3b82f6;
+    text-shadow: 0 0 20px #3b82f6, 0 0 40px #3b82f6, 0 0 80px #3b82f6;
     margin-bottom: 20px;
     animation: flicker 3s infinite alternate;
 }
+
 .subtitulo {
     font-size: 0.9rem;
     color: #e63946;
