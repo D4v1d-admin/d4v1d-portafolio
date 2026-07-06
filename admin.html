@@ -469,54 +469,18 @@
     <input type="file" id="marcaInput" accept="image/*" style="display:block; margin:15px auto; color:#fff;">
     <canvas id="marcaCanvas" style="display:none; max-width:100%; margin:15px auto; border:1px solid #3b82f6;"></canvas>
     <button id="marcaBtn" style="display:none; margin:10px auto; padding:10px 20px; background:#3b82f6; color:#fff; border:none; cursor:pointer; font-size:0.8rem;">💾 Descargar con Marca</button>
-</div>
+    </div>
 
-<script>
-    const marcaInput = document.getElementById('marcaInput');
-    const marcaCanvas = document.getElementById('marcaCanvas');
-    const marcaCtx = marcaCanvas.getContext('2d');
-    const marcaBtn = document.getElementById('marcaBtn');
+    <!-- ===== GENERADOR DE MARCA DE AGUA ===== -->
+    <div style="margin-top: 40px; padding: 20px; background: #0d0d1a; border: 2px solid #e63946; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <h2 style="color:#e63946;">🔒 Generador de Marca de Agua</h2>
+        <p style="color:#aaa; font-size:0.7rem; margin:10px 0;">Sube una imagen y descárgala con la firma "D4v1d"</p>
+        <input type="file" id="marcaInput" accept="image/*" style="display:block; margin:15px auto; color:#fff;">
+        <canvas id="marcaCanvas" style="display:none; max-width:100%; margin:15px auto; border:1px solid #3b82f6;"></canvas>
+        <button id="marcaBtn" style="display:none; margin:10px auto; padding:10px 20px; background:#3b82f6; color:#fff; border:none; cursor:pointer; font-size:0.8rem;">💾 Descargar con Marca</button>
+    </div>
 
-    marcaInput.addEventListener('change', function(e) {
-        const archivo = e.target.files[0];
-        if (!archivo) return;
-        
-        const reader = new FileReader();
-        reader.onload = function(ev) {
-            const img = new Image();
-            img.onload = function() {
-                marcaCanvas.width = img.width;
-                marcaCanvas.height = img.height;
-                marcaCtx.drawImage(img, 0, 0);
-                
-                const fontSize = Math.max(img.width * 0.05, 20);
-                marcaCtx.font = `bold ${fontSize}px Courier New, monospace`;
-                marcaCtx.fillStyle = 'rgba(59, 130, 246, 0.7)';
-                marcaCtx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
-                marcaCtx.lineWidth = 3;
-                
-                const texto = 'D4v1d';
-                const m = marcaCtx.measureText(texto);
-                const x = img.width - m.width - 20;
-                const y = img.height - 20;
-                
-                marcaCtx.strokeText(texto, x, y);
-                marcaCtx.fillText(texto, x, y);
-                
-                marcaCanvas.style.display = 'block';
-                marcaBtn.style.display = 'block';
-            };
-            img.src = ev.target.result;
-        };
-        reader.readAsDataURL(archivo);
-    });
-
-    marcaBtn.addEventListener('click', function() {
-        const enlace = document.createElement('a');
-        enlace.download = 'd4v1d_marca.png';
-        enlace.href = marcaCanvas.toDataURL('image/png');
-        enlace.click();
-    });
-</script>
+    <script>
+        // ========== SISTEMA DE LOGIN ==========
 </body>
 </html>
