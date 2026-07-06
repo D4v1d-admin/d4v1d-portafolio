@@ -16,7 +16,7 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     overflow-x: hidden;
-    padding-top: 70px;
+    padding-top: 75px;
 }
 
 /* === CANVAS DE FONDO === */
@@ -29,7 +29,7 @@ body {
     z-index: -1;
 }
 
-/* === MENÚ DE NAVEGACIÓN === */
+/* === MENÚ DE NAVEGACIÓN (SIEMPRE ENCIMA) === */
 .menu {
     display: flex;
     gap: 10px;
@@ -38,8 +38,12 @@ body {
     top: 12px;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 9999;
     padding: 0 20px;
+    background-color: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .menu a {
@@ -47,8 +51,7 @@ body {
     text-decoration: none;
     font-size: 0.75rem;
     padding: 14px 28px;
-    background-color: rgba(17, 17, 34, 0.9);
-    backdrop-filter: blur(10px);
+    background-color: rgba(17, 17, 34, 0.95);
     transition: all 0.3s ease;
     border: 1.5px solid rgba(59, 130, 246, 0.3);
     border-radius: 50px;
@@ -80,9 +83,11 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 75px);
     text-align: center;
     padding: 30px 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .logo-container {
@@ -126,7 +131,9 @@ body {
 
 /* === PÁGINAS INTERIORES === */
 .pagina-interior {
-    padding: 90px 20px 60px 20px;
+    padding: 100px 20px 60px 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .pagina-interior h1 {
@@ -251,6 +258,10 @@ body {
 
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
+    body {
+        padding-top: 85px;
+    }
+
     .nombre {
         font-size: 2.5rem;
     }
@@ -265,8 +276,10 @@ body {
     }
     
     .menu {
-        top: 8px;
+        top: 5px;
         gap: 6px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
     
     .menu a {
@@ -284,6 +297,6 @@ body {
     }
 
     .pagina-interior {
-        padding: 80px 15px 40px 15px;
+        padding: 100px 15px 40px 15px;
     }
 }
