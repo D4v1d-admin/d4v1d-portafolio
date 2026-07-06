@@ -1,14 +1,11 @@
-/* === FUENTE PIXEL ART === */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-/* === RESETEO BÁSICO === */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* === CUERPO GENERAL === */
 body {
     background-color: #0a0a0a;
     color: #ffffff;
@@ -19,7 +16,6 @@ body {
     padding-top: 65px;
 }
 
-/* === CANVAS DE FONDO === */
 #fondoCanvas {
     position: fixed;
     top: 0;
@@ -29,7 +25,6 @@ body {
     z-index: -1;
 }
 
-/* === HERO (INICIO) === */
 .hero {
     display: flex;
     flex-direction: column;
@@ -40,7 +35,6 @@ body {
     padding: 30px 20px;
 }
 
-/* === LOGO === */
 .logo-container {
     margin-bottom: 20px;
 }
@@ -59,7 +53,7 @@ body {
 .nombre {
     font-size: 5rem;
     color: #3b82f6;
-    text-shadow: 0 0 20px #3b82f6, 0 0 40px #3b82f6, 0 0 80px #3b82f6;
+    text-shadow: 0 0 20px #3b82f6, 0 0 40px #3b82f6;
     margin-bottom: 20px;
     animation: flicker 3s infinite alternate;
 }
@@ -70,18 +64,15 @@ body {
     text-shadow: 2px 2px 0px #000;
 }
 
-/* === MENÚ DE NAVEGACIÓN === */
 .menu {
     display: flex;
     gap: 10px;
-    flex-wrap: nowrap;
     justify-content: center;
     position: fixed;
     top: 12px;
     left: 0;
     width: 100%;
     z-index: 100;
-    padding: 0 20px;
 }
 
 .menu a {
@@ -94,8 +85,6 @@ body {
     transition: all 0.3s ease;
     border: 1.5px solid rgba(59, 130, 246, 0.3);
     border-radius: 50px;
-    white-space: nowrap;
-    letter-spacing: 1px;
 }
 
 .menu a:hover {
@@ -116,17 +105,11 @@ body {
     box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
 }
 
-/* === ANIMACIONES === */
 @keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-        opacity: 1;
-    }
-    20%, 24%, 55% {
-        opacity: 0.7;
-    }
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.7; }
 }
 
-/* === PÁGINAS INTERIORES === */
 .pagina-interior {
     padding: 80px 20px 40px 20px;
 }
@@ -139,7 +122,6 @@ body {
     text-shadow: 0 0 10px #3b82f6;
 }
 
-/* === GALERÍA DE PROYECTOS === */
 .galeria {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -176,8 +158,6 @@ body {
     object-fit: cover;
     image-rendering: pixelated;
     user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
     pointer-events: none;
 }
 
@@ -201,7 +181,6 @@ body {
     font-size: 0.5rem;
     color: #cccccc;
     margin: 10px 0;
-    line-height: 1.4;
 }
 
 .proyecto a {
@@ -212,8 +191,6 @@ body {
     color: #ffffff;
     text-decoration: none;
     font-size: 0.6rem;
-    border: none;
-    transition: all 0.3s;
 }
 
 .proyecto a:hover {
@@ -221,7 +198,6 @@ body {
     box-shadow: 0 0 10px #e63946;
 }
 
-/* === PÁGINA DE DATOS === */
 .datos-container {
     max-width: 600px;
     margin: 30px auto;
@@ -236,50 +212,16 @@ body {
     line-height: 1.8;
 }
 
-.datos-container strong {
-    color: #3b82f6;
-}
+.datos-container strong { color: #3b82f6; }
+.datos-container a { color: #e63946; text-decoration: none; }
+.datos-container a:hover { text-decoration: underline; }
 
-.datos-container a {
-    color: #e63946;
-    text-decoration: none;
-}
-
-.datos-container a:hover {
-    text-decoration: underline;
-}
-
-/* === RESPONSIVE === */
 @media (max-width: 768px) {
-    .nombre {
-        font-size: 2.5rem;
-    }
-    
-    .subtitulo {
-        font-size: 0.55rem;
-    }
-    
-    .logo-img {
-        width: 140px;
-        height: 140px;
-    }
-    
-    .menu {
-        top: 8px;
-        gap: 6px;
-    }
-    
-    .menu a {
-        font-size: 0.55rem;
-        padding: 10px 18px;
-    }
-    
-    .menu a:hover,
-    .menu a.activa {
-        font-size: 0.6rem;
-    }
-    
-    .galeria {
-        grid-template-columns: 1fr;
-    }
+    .nombre { font-size: 2.5rem; }
+    .subtitulo { font-size: 0.55rem; }
+    .logo-img { width: 140px; height: 140px; }
+    .menu { top: 8px; gap: 6px; }
+    .menu a { font-size: 0.55rem; padding: 10px 18px; }
+    .menu a:hover, .menu a.activa { font-size: 0.6rem; }
+    .galeria { grid-template-columns: 1fr; }
 }
