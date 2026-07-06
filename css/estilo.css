@@ -75,11 +75,12 @@ body {
 .menu a {
     color: #cccccc;
     text-decoration: none;
-    font-size: 0.7rem;
-    padding: 16px 28px;
+    font-size: 0.85rem;
+    padding: 16px 35px;
+    margin: 0 5px;
     background-color: #111122;
     transition: all 0.3s;
-    border-right: 2px solid #1e3a8a;
+    border: 2px solid #1e3a8a;
     border-bottom: 4px solid transparent;
     white-space: nowrap;
 }
