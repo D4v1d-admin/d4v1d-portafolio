@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marca de Agua | D4v1d</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: Arial;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 { color: #3b82f6; }
+        canvas { margin: 20px auto; max-width: 100%; border: 2px solid #3b82f6; display: none; }
+        button { padding: 10px 25px; background: #3b82f6; color: #fff; border: none; cursor: pointer; font-size: 1rem; display: none; margin: 10px; }
+        button:hover { background: #e63946; }
+        input { margin: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🔒 Generador de Marca de Agua</h1>
+    <p>Sube tu imagen y descárgala con la marca "D4v1d"</p>
+    
+    <input type="file" id="inputImagen" accept="image/*">
+    <br>
+    <canvas id="canvas"></canvas>
+    <br>
+    <button id="btnDescargar">💾 Descargar con Marca</button>
+
+    <script>
+        const input = document.getElementById('inputImagen');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const btn = document.getElementById('btnDescargar');
+
+        input.addEventListener('change', function(e) {
+            const archivo = e.target.files[0];
+            if (!archivo) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = new Image();
+                img.onload = function() {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                    
+                    const fontSize = Math.max(img.width * 0.05, 20);
+                    ctx.font = `bold ${fontSize}px Courier New, monospace`;
+                    ctx.fillStyle = 'rgba(59, 130, 246, 0.7)';
+                    ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
+                    ctx.lineWidth = 3;
+                    
+                    const texto = 'D4v1d';
+                    const m = ctx.measureText(texto);
+                    const x = img.width - m.width - 20;
+                    const y = img.height - 20;
+                    
+                    ctx.strokeText(texto, x, y);
+                    ctx.fillText(texto, x, y);
+                    
+                    canvas.style.display = 'block';
+                    btn.style.display = 'inline-block';
+                };
+                img.src = ev.target.result;
+            };
+            reader.readAsDataURL(archivo);
+        });
+
+        btn.addEventListener('click', function() {
+            const enlace = document.createElement('a');
+            enlace.download = 'd4v1d_marca.png';
+            enlace.href = canvas.toDataURL('image/png');
+            enlace.click();
+        });
+    </script>
+</body>
+</html>
