@@ -22,5 +22,14 @@
     </header>
 
     <script src="js/particulas.js"></script>
+    <!-- Atajo secreto: Ctrl + Shift + D para ir al panel admin -->
+<script>
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+            e.preventDefault();
+            window.location.href = 'admin.html';
+        }
+    });
+</script>
 </body>
 </html>
