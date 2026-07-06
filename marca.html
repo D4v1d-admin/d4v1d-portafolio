@@ -1,1 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Marca de Agua | D4v1d</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        body {
+            background-color: #0a0a0a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .panel {
+            background: #1a1a2e;
+            border: 2px solid #3b82f6;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        }
+
+        h1 {
+            color: #3b82f6;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        p {
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .zona-arrastre {
+            border: 3px dashed #3b82f6;
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #0d0d1a;
+        }
+
+        .zona-arrastre:hover {
+            border-color: #e63946;
+            background: #111;
+        }
+
+        .zona-arrastre input {
+            display: none;
+        }
+
+        canvas {
+            display: none;
+            margin: 20px auto;
+            max-width: 100%;
+            border: 2px solid #3b82f6;
+        }
+
+        button {
+            display: none;
+            margin: 15px auto;
+            padding: 12px 30px;
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #e63946;
+            box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <h1>🔒 Generador de Marca de Agua</h1>
+        <p>Arrastra tu imagen y descárgala con la marca "D4v1d"</p>
+
+        <div class="zona-arrastre" id="zonaArrastre">
+            📁 Arrastra tu imagen aquí o haz clic
+            <input type="file" id="inputImagen" accept="image/*">
+        </div>
+
+        <canvas id="canvas"></canvas>
+        <button id="btnDescargar">💾 Descargar con Marca</button>
+    </div>
+
+    <script>
+        const zonaArrastre = document.getElementById('zonaArrastre');
+        const inputImagen = document.getElementById('inputImagen');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const btnDescargar = document.getElementById('btnDescargar');
+
+        zonaArrastre.addEventListener('click', () => inputImagen.click());
+        inputImagen.addEventListener('change', manejarArchivo);
+
+        zonaArrastre.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            zonaArrastre.style.borderColor = '#e63946';
+        });
+
+        zonaArrastre.addEventListener('dragleave', () => {
+            zonaArrastre.style.borderColor = '#3b82f6';
+        });
+
+        zonaArrastre.addEventListener('drop', (e) => {
+            e.preventDefault();
+            zonaArrastre.style.borderColor = '#3b82f6';
+            const archivo = e.dataTransfer.files[0];
+            if (archivo && archivo.type.startsWith('image/')) {
+                procesarImagen(archivo);
+            }
+        });
+
+        function manejarArchivo(e) {
+            const archivo = e.target.files[0];
+            if (archivo) procesarImagen(archivo);
+        }
+
+        function procesarImagen(archivo) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+
+                    // Añadir marca de agua
+                    const fontSize = Math.max(img.width * 0.05, 20);
+                    ctx.font = `bold ${fontSize}px 'Courier New', monospace`;
+                    ctx.fillStyle = 'rgba(59, 130, 246, 0.7)';
+                    ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
+                    ctx.lineWidth = 3;
+
+                    const texto = 'D4v1d';
+                    const medidas = ctx.measureText(texto);
+                    const x = img.width - medidas.width - 20;
+                    const y = img.height - 20;
+
+                    ctx.strokeText(texto, x, y);
+                    ctx.fillText(texto, x, y);
+
+                    canvas.style.display = 'block';
+                    btnDescargar.style.display = 'block';
+                    zonaArrastre.style.display = 'none';
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(archivo);
+        }
+
+        btnDescargar.addEventListener('click', () => {
+            const enlace = document.createElement('a');
+            enlace.download = 'd4v1d_marca.png';
+            enlace.href = canvas.toDataURL('image/png');
+            enlace.click();
+        });
+    </script>
+</body>
+</html>
