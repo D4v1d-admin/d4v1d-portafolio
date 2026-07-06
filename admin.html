@@ -18,7 +18,6 @@
             padding: 20px;
         }
         
-        /* PANTALLA DE LOGIN */
         .login-pantalla {
             max-width: 400px;
             margin: 100px auto;
@@ -91,7 +90,6 @@
             75% { transform: translateX(5px); }
         }
         
-        /* PANEL DE ADMIN (oculto hasta login) */
         .panel {
             display: none;
             max-width: 800px;
@@ -240,7 +238,7 @@
 </head>
 <body>
 
-    <!-- ========== PANTALLA DE LOGIN ========== -->
+    <!-- PANTALLA DE LOGIN -->
     <div class="login-pantalla" id="loginPantalla">
         <div class="icono">🔐</div>
         <h1>ACCESO RESTRINGIDO</h1>
@@ -250,7 +248,7 @@
         <p class="error" id="errorMsg">❌ Contraseña incorrecta</p>
     </div>
 
-    <!-- ========== PANEL DE ADMINISTRACIÓN ========== -->
+    <!-- PANEL DE ADMINISTRACIÓN -->
     <div class="panel" id="panelAdmin">
         <h1>🔐 PANEL DE ADMINISTRACIÓN</h1>
         <p class="subtitulo">Bienvenida, administradora</p>
@@ -258,58 +256,53 @@
         <span class="btn-cerrar" onclick="cerrarSesion()">🚪 Cerrar sesión</span>
         
         <div class="aviso">
-    📋 <strong>2 formas de actualizar tu sitio:</strong><br><br>
-    <strong>Opción A:</strong> Edita <code>data/datos.json</code> o <code>data/proyectos.json</code> directamente en GitHub. Se actualiza solo.<br><br>
-    <strong>Opción B:</strong> Usa este panel, descarga los archivos y súbelos a GitHub. Se actualiza solo.
-</div>
+            📋 <strong>2 formas de actualizar tu sitio:</strong><br><br>
+            <strong>Opción A:</strong> Edita <code>data/datos.json</code> o <code>data/proyectos.json</code> directamente en GitHub. Se actualiza solo.<br><br>
+            <strong>Opción B:</strong> Usa este panel, descarga los archivos y súbelos a GitHub. Se actualiza solo.
+        </div>
         
-        <!-- SECCIÓN: DATOS PERSONALES -->
+        <!-- DATOS PERSONALES -->
         <h2>📋 Datos Personales</h2>
-        
         <label>Nombre:</label>
         <input type="text" id="nombre" placeholder="David">
-        
         <label>Alias:</label>
         <input type="text" id="alias" placeholder="D4v1d">
-        
         <label>Email:</label>
         <input type="email" id="email" placeholder="d4v1d@ejemplo.com">
-        
-        <label>DeviantArt (enlace completo):</label>
+        <label>DeviantArt:</label>
         <input type="url" id="deviantart" placeholder="https://www.deviantart.com/d4v1d">
-        
-        <label>GitHub (enlace completo):</label>
+        <label>GitHub:</label>
         <input type="url" id="github" placeholder="https://github.com/d4v1d">
-        
         <label>Habilidades (separadas por coma):</label>
         <input type="text" id="habilidades" placeholder="C++, Pixel Art, SDL2, Aseprite">
-        
         <label>Biografía:</label>
         <textarea id="biografia" placeholder="Cuéntanos sobre ti..."></textarea>
         
-        <!-- SECCIÓN: PROYECTOS -->
+        <!-- PROYECTOS -->
         <h2>🎨 Proyectos</h2>
-        <div id="lista-proyectos-admin">
-            <!-- Se llenan con JavaScript -->
-        </div>
+        <div id="lista-proyectos-admin"></div>
         <button class="btn-agregar" onclick="agregarProyecto()">+ Agregar Proyecto</button>
         
-        <!-- BOTÓN GUARDAR -->
         <button onclick="generarArchivos()">💾 GENERAR ARCHIVOS PARA DESCARGAR</button>
-        
-        <div class="mensaje" id="mensaje">
-            ✅ ¡Archivos generados! Descárgalos y súbelos a tu carpeta data/
+        <div class="mensaje" id="mensaje">✅ ¡Archivos generados!</div>
+
+        <!-- GENERADOR DE MARCA DE AGUA -->
+        <div style="margin-top: 40px; padding: 20px; background: #0d0d1a; border: 2px solid #e63946;">
+            <h2 style="color:#e63946;">🔒 Generador de Marca de Agua</h2>
+            <p style="color:#aaa; font-size:0.7rem; margin:10px 0;">Sube una imagen y descárgala con la firma "D4v1d"</p>
+            <input type="file" id="marcaInput" accept="image/*" style="display:block; margin:15px auto; color:#fff;">
+            <canvas id="marcaCanvas" style="display:none; max-width:100%; margin:15px auto; border:1px solid #3b82f6;"></canvas>
+            <button id="marcaBtn" style="display:none; margin:10px auto; padding:10px 20px; background:#3b82f6; color:#fff; border:none; cursor:pointer; font-size:0.8rem;">💾 Descargar con Marca</button>
         </div>
     </div>
 
     <script>
-        // ========== SISTEMA DE LOGIN ==========
+        // LOGIN
         const PASSWORD_CORRECTA = 'D4v1d01';
         
         function verificarPassword() {
             const input = document.getElementById('passwordInput');
             const error = document.getElementById('errorMsg');
-            
             if (input.value === PASSWORD_CORRECTA) {
                 document.getElementById('loginPantalla').style.display = 'none';
                 document.getElementById('panelAdmin').style.display = 'block';
@@ -329,14 +322,11 @@
             document.getElementById('mensaje').classList.remove('exito');
         }
         
-        // Permitir entrar con Enter
         document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                verificarPassword();
-            }
+            if (e.key === 'Enter') verificarPassword();
         });
         
-        // ========== CARGA DE DATOS ==========
+        // DATOS
         let datos = {};
         let proyectos = [];
         
@@ -353,7 +343,7 @@
                     document.getElementById('habilidades').value = (data.habilidades || []).join(', ');
                     document.getElementById('biografia').value = data.biografia || '';
                 })
-                .catch(() => console.log('datos.json no encontrado, inicia vacío'));
+                .catch(() => {});
             
             fetch('data/proyectos.json')
                 .then(res => res.json())
@@ -361,35 +351,26 @@
                     proyectos = data;
                     mostrarProyectos();
                 })
-                .catch(() => {
-                    proyectos = [];
-                    mostrarProyectos();
-                });
+                .catch(() => { proyectos = []; mostrarProyectos(); });
         }
         
         function mostrarProyectos() {
             const contenedor = document.getElementById('lista-proyectos-admin');
             contenedor.innerHTML = '';
-            
             proyectos.forEach((proy, index) => {
                 const div = document.createElement('div');
                 div.className = 'proyecto-item';
                 div.innerHTML = `
                     <label>Título:</label>
-                    <input type="text" class="proy-titulo" value="${proy.titulo || ''}" placeholder="Título del proyecto">
-                    
+                    <input type="text" class="proy-titulo" value="${proy.titulo || ''}">
                     <label>Descripción:</label>
-                    <input type="text" class="proy-desc" value="${proy.descripcion || ''}" placeholder="Descripción breve">
-                    
-                    <label>Imagen (enlace o ruta):</label>
-                    <input type="text" class="proy-img" value="${proy.imagen || ''}" placeholder="img/proyecto.png o enlace">
-                    
-                    <label>Enlace del proyecto:</label>
-                    <input type="url" class="proy-enlace" value="${proy.enlace || ''}" placeholder="https://deviantart.com/...">
-                    
+                    <input type="text" class="proy-desc" value="${proy.descripcion || ''}">
+                    <label>Imagen:</label>
+                    <input type="text" class="proy-img" value="${proy.imagen || ''}">
+                    <label>Enlace:</label>
+                    <input type="url" class="proy-enlace" value="${proy.enlace || ''}">
                     <label>Tipo:</label>
-                    <input type="text" class="proy-tipo" value="${proy.tipo || ''}" placeholder="pixel o codigo">
-                    
+                    <input type="text" class="proy-tipo" value="${proy.tipo || ''}">
                     <button class="btn-eliminar" onclick="eliminarProyecto(${index})">🗑️ Eliminar proyecto</button>
                 `;
                 contenedor.appendChild(div);
@@ -397,18 +378,12 @@
         }
         
         function agregarProyecto() {
-            proyectos.push({
-                titulo: '',
-                descripcion: '',
-                imagen: '',
-                enlace: '',
-                tipo: 'pixel'
-            });
+            proyectos.push({ titulo: '', descripcion: '', imagen: '', enlace: '', tipo: 'pixel' });
             mostrarProyectos();
         }
         
         function eliminarProyecto(index) {
-            if (confirm('¿Estás segura de eliminar este proyecto?')) {
+            if (confirm('¿Eliminar este proyecto?')) {
                 proyectos.splice(index, 1);
                 mostrarProyectos();
             }
@@ -425,62 +400,72 @@
                 biografia: document.getElementById('biografia').value
             };
             
-            const proyectosActualizados = [];
-            document.querySelectorAll('.proyecto-item').forEach(item => {
-                proyectosActualizados.push({
-                    titulo: item.querySelector('.proy-titulo').value,
-                    descripcion: item.querySelector('.proy-desc').value,
-                    imagen: item.querySelector('.proy-img').value,
-                    enlace: item.querySelector('.proy-enlace').value,
-                    tipo: item.querySelector('.proy-tipo').value
-                });
-            });
-            
-            // Descargar datos.json
             const blobDatos = new Blob([JSON.stringify(datosActualizados, null, 4)], {type: 'application/json'});
-            const urlDatos = URL.createObjectURL(blobDatos);
             const aDatos = document.createElement('a');
-            aDatos.href = urlDatos;
+            aDatos.href = URL.createObjectURL(blobDatos);
             aDatos.download = 'datos.json';
             aDatos.click();
             
             setTimeout(() => {
-                // Descargar proyectos.json
+                const proyectosActualizados = [];
+                document.querySelectorAll('.proyecto-item').forEach(item => {
+                    proyectosActualizados.push({
+                        titulo: item.querySelector('.proy-titulo').value,
+                        descripcion: item.querySelector('.proy-desc').value,
+                        imagen: item.querySelector('.proy-img').value,
+                        enlace: item.querySelector('.proy-enlace').value,
+                        tipo: item.querySelector('.proy-tipo').value
+                    });
+                });
                 const blobProyectos = new Blob([JSON.stringify(proyectosActualizados, null, 4)], {type: 'application/json'});
-                const urlProyectos = URL.createObjectURL(blobProyectos);
                 const aProyectos = document.createElement('a');
-                aProyectos.href = urlProyectos;
+                aProyectos.href = URL.createObjectURL(blobProyectos);
                 aProyectos.download = 'proyectos.json';
                 aProyectos.click();
-                
                 document.getElementById('mensaje').classList.add('exito');
-                
-                setTimeout(() => {
-                    document.getElementById('mensaje').classList.remove('exito');
-                }, 5000);
+                setTimeout(() => document.getElementById('mensaje').classList.remove('exito'), 5000);
             }, 500);
         }
+
+        // GENERADOR DE MARCA DE AGUA
+        const marcaInput = document.getElementById('marcaInput');
+        const marcaCanvas = document.getElementById('marcaCanvas');
+        const marcaCtx = marcaCanvas.getContext('2d');
+        const marcaBtn = document.getElementById('marcaBtn');
+
+        marcaInput.addEventListener('change', function(e) {
+            const archivo = e.target.files[0];
+            if (!archivo) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = new Image();
+                img.onload = function() {
+                    marcaCanvas.width = img.width;
+                    marcaCanvas.height = img.height;
+                    marcaCtx.drawImage(img, 0, 0);
+                    const fontSize = Math.max(img.width * 0.05, 20);
+                    marcaCtx.font = `bold ${fontSize}px Courier New, monospace`;
+                    marcaCtx.fillStyle = 'rgba(59, 130, 246, 0.7)';
+                    marcaCtx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
+                    marcaCtx.lineWidth = 3;
+                    const texto = 'D4v1d';
+                    const m = marcaCtx.measureText(texto);
+                    marcaCtx.strokeText(texto, img.width - m.width - 20, img.height - 20);
+                    marcaCtx.fillText(texto, img.width - m.width - 20, img.height - 20);
+                    marcaCanvas.style.display = 'block';
+                    marcaBtn.style.display = 'block';
+                };
+                img.src = ev.target.result;
+            };
+            reader.readAsDataURL(archivo);
+        });
+
+        marcaBtn.addEventListener('click', function() {
+            const enlace = document.createElement('a');
+            enlace.download = 'd4v1d_marca.png';
+            enlace.href = marcaCanvas.toDataURL('image/png');
+            enlace.click();
+        });
     </script>
-    <!-- ===== GENERADOR DE MARCA DE AGUA ===== -->
-<div style="margin-top: 40px; padding: 20px; background: #0d0d1a; border: 2px solid #e63946;">
-    <h2 style="color:#e63946;">🔒 Generador de Marca de Agua</h2>
-    <p style="color:#aaa; font-size:0.7rem; margin:10px 0;">Sube una imagen y descárgala con la firma "D4v1d"</p>
-    
-    <input type="file" id="marcaInput" accept="image/*" style="display:block; margin:15px auto; color:#fff;">
-    <canvas id="marcaCanvas" style="display:none; max-width:100%; margin:15px auto; border:1px solid #3b82f6;"></canvas>
-    <button id="marcaBtn" style="display:none; margin:10px auto; padding:10px 20px; background:#3b82f6; color:#fff; border:none; cursor:pointer; font-size:0.8rem;">💾 Descargar con Marca</button>
-    </div>
-
-    <!-- ===== GENERADOR DE MARCA DE AGUA ===== -->
-    <div style="margin-top: 40px; padding: 20px; background: #0d0d1a; border: 2px solid #e63946; max-width: 800px; margin-left: auto; margin-right: auto;">
-        <h2 style="color:#e63946;">🔒 Generador de Marca de Agua</h2>
-        <p style="color:#aaa; font-size:0.7rem; margin:10px 0;">Sube una imagen y descárgala con la firma "D4v1d"</p>
-        <input type="file" id="marcaInput" accept="image/*" style="display:block; margin:15px auto; color:#fff;">
-        <canvas id="marcaCanvas" style="display:none; max-width:100%; margin:15px auto; border:1px solid #3b82f6;"></canvas>
-        <button id="marcaBtn" style="display:none; margin:10px auto; padding:10px 20px; background:#3b82f6; color:#fff; border:none; cursor:pointer; font-size:0.8rem;">💾 Descargar con Marca</button>
-    </div>
-
-    <script>
-        // ========== SISTEMA DE LOGIN ==========
 </body>
 </html>
