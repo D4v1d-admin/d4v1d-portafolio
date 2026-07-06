@@ -16,7 +16,7 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     overflow-x: hidden;
-    padding-top: 55px;
+    padding-top: 70px;
 }
 
 /* === CANVAS DE FONDO === */
@@ -29,33 +29,19 @@ body {
     z-index: -1;
 }
 
-/* === HERO (INICIO) === */
-.hero {
+/* === MENÚ DE NAVEGACIÓN === */
+.menu {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: calc(100vh - 55px);
-    text-align: center;
-    padding: 40px 20px 20px 20px;
+    gap: 10px;
+    justify-content: center;
+    position: fixed;
+    top: 12px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0 20px;
 }
 
-.nombre {
-    font-size: 6rem;
-    color: #3b82f6;
-    text-shadow: 0 0 20px #3b82f6, 0 0 40px #3b82f6, 0 0 80px #3b82f6;
-    margin-bottom: 20px;
-    animation: flicker 3s infinite alternate;
-}
-
-.subtitulo {
-    font-size: 0.9rem;
-    color: #e63946;
-    margin-bottom: 40px;
-    text-shadow: 2px 2px 0px #000;
-}
-
-/* === MENÚ DE NAVEGACIÓN TIPO PESTAÑAS === */
 .menu a {
     color: #aaaacc;
     text-decoration: none;
@@ -70,23 +56,6 @@ body {
     letter-spacing: 1px;
 }
 
-.menu a {
-    color: #cccccc;
-    text-decoration: none;
-    font-size: 0.85rem;
-    padding: 16px 35px;
-    margin: 0 5px;
-    background-color: #111122;
-    transition: all 0.3s;
-    border: 2px solid #1e3a8a;
-    border-bottom: 4px solid transparent;
-    white-space: nowrap;
-}
-
-.menu a:last-child {
-    border-right: none;
-}
-
 .menu a:hover {
     background-color: rgba(30, 58, 138, 0.8);
     color: #ffffff;
@@ -95,7 +64,7 @@ body {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
     transform: translateY(-2px);
 }
-/* Pestaña activa */
+
 .menu a.activa {
     background: linear-gradient(135deg, #1e3a8a, #3b82f6);
     color: #ffffff;
@@ -103,7 +72,44 @@ body {
     font-weight: bold;
     border-color: #3b82f6;
     box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
-    letter-spacing: 1px;
+}
+
+/* === HERO (INICIO) === */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: calc(100vh - 70px);
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.logo-container {
+    margin-bottom: 15px;
+}
+
+.logo-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid #3b82f6;
+    object-fit: cover;
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+}
+
+.nombre {
+    font-size: 6rem;
+    color: #3b82f6;
+    text-shadow: 0 0 20px #3b82f6, 0 0 40px #3b82f6, 0 0 80px #3b82f6;
+    margin-bottom: 20px;
+    animation: flicker 3s infinite alternate;
+}
+
+.subtitulo {
+    font-size: 0.8rem;
+    color: #e63946;
+    text-shadow: 2px 2px 0px #000;
 }
 
 /* === ANIMACIONES === */
@@ -120,15 +126,17 @@ body {
 
 /* === PÁGINAS INTERIORES === */
 .pagina-interior {
-    padding: 120px 20px 60px 20px;
+    padding: 90px 20px 60px 20px;
 }
+
 .pagina-interior h1 {
     text-align: center;
     color: #3b82f6;
     font-size: 1.5rem;
-    margin-bottom: 50px;
-    margin-top: 20px;
+    margin-bottom: 40px;
     text-shadow: 0 0 10px #3b82f6;
+    position: relative;
+    z-index: 1;
 }
 
 /* === GALERÍA DE PROYECTOS === */
@@ -137,7 +145,7 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
     max-width: 1200px;
-    margin: 30px auto;
+    margin: 0 auto;
     padding: 20px;
 }
 
@@ -244,14 +252,19 @@ body {
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
     .nombre {
-        font-size: 1.8rem;
+        font-size: 2.5rem;
     }
     
     .subtitulo {
-        font-size: 0.6rem;
+        font-size: 0.55rem;
+    }
+
+    .logo-img {
+        width: 140px;
+        height: 140px;
     }
     
-            .menu {
+    .menu {
         top: 8px;
         gap: 6px;
     }
@@ -269,20 +282,8 @@ body {
     .galeria {
         grid-template-columns: 1fr;
     }
-}
-/* === LOGO === */
-.logo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
 
-.logo-img {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    border: 3px solid #3b82f6;
-    object-fit: cover;
-    box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+    .pagina-interior {
+        padding: 80px 15px 40px 15px;
+    }
 }
