@@ -5,240 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin | D4v1d</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background-color: #0a0a0a;
-            color: #ffffff;
-            font-family: 'Courier New', monospace;
-            padding: 20px;
-        }
-        
-        .login-pantalla {
-            max-width: 400px;
-            margin: 100px auto;
-            background-color: #1a1a2e;
-            border: 2px solid #3b82f6;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
-        }
-        
-        .login-pantalla h1 {
-            color: #3b82f6;
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-            text-shadow: 0 0 10px #3b82f6;
-        }
-        
-        .login-pantalla .icono {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-        
-        .login-pantalla input {
-            width: 100%;
-            padding: 12px;
-            margin: 15px 0;
-            background-color: #0a0a0a;
-            border: 1px solid #3b82f6;
-            color: #ffffff;
-            text-align: center;
-            font-size: 1.1rem;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 3px;
-        }
-        
-        .login-pantalla input:focus {
-            outline: none;
-            border-color: #e63946;
-            box-shadow: 0 0 15px rgba(230, 57, 70, 0.4);
-        }
-        
-        .login-pantalla button {
-            width: 100%;
-            padding: 12px;
-            background-color: #3b82f6;
-            color: #ffffff;
-            border: none;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .login-pantalla button:hover {
-            background-color: #e63946;
-            box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
-        }
-        
-        .error {
-            color: #e63946;
-            margin-top: 15px;
-            display: none;
-            animation: temblar 0.3s;
-        }
-        
-        @keyframes temblar {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-        
-        .panel {
-            display: none;
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #1a1a2e;
-            border: 2px solid #3b82f6;
-            padding: 30px;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-        }
-        
-        .panel h1 {
-            color: #3b82f6;
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-            text-shadow: 0 0 10px #3b82f6;
-        }
-        
-        .panel .subtitulo {
-            text-align: center;
-            color: #888;
-            margin-bottom: 30px;
-            font-size: 0.8rem;
-        }
-        
-        .btn-cerrar {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: #e63946;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.8rem;
-            margin-bottom: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn-cerrar:hover {
-            background-color: #ff4444;
-            box-shadow: 0 0 10px rgba(230, 57, 70, 0.5);
-        }
-        
-        h2 {
-            color: #e63946;
-            margin: 25px 0 15px 0;
-            font-size: 1.1rem;
-            border-bottom: 1px solid #3b82f6;
-            padding-bottom: 5px;
-        }
-        
-        label {
-            display: block;
-            margin: 12px 0 5px 0;
-            color: #3b82f6;
-            font-weight: bold;
-        }
-        
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            background-color: #0a0a0a;
-            border: 1px solid #3b82f6;
-            color: #ffffff;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-        }
-        
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: #e63946;
-            box-shadow: 0 0 10px rgba(230, 57, 70, 0.3);
-        }
-        
-        textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-        
-        button {
-            display: block;
-            width: 100%;
-            margin-top: 30px;
-            padding: 15px;
-            background-color: #3b82f6;
-            color: #ffffff;
-            border: none;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Courier New', monospace;
-        }
-        
-        button:hover {
-            background-color: #e63946;
-            box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
-        }
-        
-        .mensaje {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            text-align: center;
-            background-color: #1e3a8a;
-            border: 1px solid #3b82f6;
-        }
-        
-        .mensaje.exito {
-            display: block;
-            background-color: #1a3a1a;
-            border-color: #00ff00;
-            color: #00ff00;
-        }
-        
-        .proyecto-item {
-            background-color: #0d0d1a;
-            border: 1px solid #3b82f6;
-            padding: 15px;
-            margin: 15px 0;
-        }
-        
-        .btn-eliminar {
-            background-color: #e63946;
-            padding: 8px 15px;
-            margin-top: 10px;
-            font-size: 0.8rem;
-        }
-        
-        .btn-agregar {
-            background-color: #1e3a8a;
-            padding: 10px;
-            margin: 15px 0;
-            font-size: 0.9rem;
-        }
-        
-        .aviso {
-            background-color: #1a1a00;
-            border: 1px solid #ffcc00;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #ffcc00;
-            font-size: 0.8rem;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #0a0a0a; color: #fff; font-family: 'Courier New', monospace; padding: 20px; }
+        .login-pantalla { max-width: 400px; margin: 100px auto; background: #1a1a2e; border: 2px solid #3b82f6; padding: 40px; text-align: center; box-shadow: 0 0 30px rgba(59,130,246,0.4); }
+        .login-pantalla h1 { color: #3b82f6; margin-bottom: 10px; font-size: 1.3rem; text-shadow: 0 0 10px #3b82f6; }
+        .login-pantalla .icono { font-size: 3rem; margin-bottom: 20px; }
+        .login-pantalla input { width: 100%; padding: 12px; margin: 15px 0; background: #0a0a0a; border: 1px solid #3b82f6; color: #fff; text-align: center; font-size: 1.1rem; font-family: 'Courier New', monospace; letter-spacing: 3px; }
+        .login-pantalla input:focus { outline: none; border-color: #e63946; box-shadow: 0 0 15px rgba(230,57,70,0.4); }
+        .login-pantalla button { width: 100%; padding: 12px; background: #3b82f6; color: #fff; border: none; font-size: 1rem; font-weight: bold; cursor: pointer; font-family: 'Courier New', monospace; }
+        .login-pantalla button:hover { background: #e63946; box-shadow: 0 0 20px rgba(230,57,70,0.5); }
+        .error { color: #e63946; margin-top: 15px; display: none; }
+        .panel { display: none; max-width: 800px; margin: 0 auto; background: #1a1a2e; border: 2px solid #3b82f6; padding: 30px; box-shadow: 0 0 20px rgba(59,130,246,0.3); }
+        .panel h1 { color: #3b82f6; text-align: center; margin-bottom: 10px; font-size: 1.5rem; }
+        .panel .subtitulo { text-align: center; color: #888; margin-bottom: 30px; font-size: 0.8rem; }
+        .btn-cerrar { display: inline-block; padding: 8px 15px; background: #e63946; color: #fff; text-decoration: none; font-size: 0.8rem; margin-bottom: 20px; cursor: pointer; }
+        .btn-cerrar:hover { background: #ff4444; }
+        h2 { color: #e63946; margin: 25px 0 15px; font-size: 1.1rem; border-bottom: 1px solid #3b82f6; padding-bottom: 5px; }
+        label { display: block; margin: 12px 0 5px; color: #3b82f6; font-weight: bold; }
+        input, textarea { width: 100%; padding: 10px; background: #0a0a0a; border: 1px solid #3b82f6; color: #fff; font-family: 'Courier New', monospace; font-size: 0.9rem; }
+        input:focus, textarea:focus { outline: none; border-color: #e63946; box-shadow: 0 0 10px rgba(230,57,70,0.3); }
+        textarea { min-height: 80px; resize: vertical; }
+        button { display: block; width: 100%; margin-top: 30px; padding: 15px; background: #3b82f6; color: #fff; border: none; font-size: 1rem; font-weight: bold; cursor: pointer; font-family: 'Courier New', monospace; }
+        button:hover { background: #e63946; box-shadow: 0 0 20px rgba(230,57,70,0.5); }
+        .mensaje { display: none; margin-top: 20px; padding: 15px; text-align: center; background: #1e3a8a; border: 1px solid #3b82f6; }
+        .mensaje.exito { display: block; background: #1a3a1a; border-color: #00ff00; color: #00ff00; }
+        .proyecto-item { background: #0d0d1a; border: 1px solid #3b82f6; padding: 15px; margin: 15px 0; }
+        .btn-eliminar { background: #e63946; padding: 8px 15px; margin-top: 10px; font-size: 0.8rem; }
+        .btn-agregar { background: #1e3a8a; padding: 10px; margin: 15px 0; font-size: 0.9rem; }
+        .aviso { background: #1a1a00; border: 1px solid #ffcc00; padding: 15px; margin-bottom: 20px; text-align: center; color: #ffcc00; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <!-- PANTALLA DE LOGIN -->
     <div class="login-pantalla" id="loginPantalla">
         <div class="icono">🔐</div>
         <h1>ACCESO RESTRINGIDO</h1>
@@ -248,192 +46,120 @@
         <p class="error" id="errorMsg">❌ Contraseña incorrecta</p>
     </div>
 
-    <!-- PANEL DE ADMINISTRACIÓN -->
     <div class="panel" id="panelAdmin">
         <h1>🔐 PANEL DE ADMINISTRACIÓN</h1>
         <p class="subtitulo">Bienvenida, administradora</p>
-        
         <span class="btn-cerrar" onclick="cerrarSesion()">🚪 Cerrar sesión</span>
         
         <div class="aviso">
-            📋 <strong>2 formas de actualizar tu sitio:</strong><br><br>
-            <strong>Opción A:</strong> Edita <code>data/datos.json</code> o <code>data/proyectos.json</code> directamente en GitHub. Se actualiza solo.<br><br>
-            <strong>Opción B:</strong> Usa este panel, descarga los archivos y súbelos a GitHub. Se actualiza solo.
+            📋 <strong>2 formas de actualizar:</strong><br><br>
+            <strong>A:</strong> Edita <code>data/datos.json</code> o <code>data/proyectos.json</code> en GitHub.<br><br>
+            <strong>B:</strong> Usa este panel, descarga y sube los archivos a GitHub.
         </div>
         
-        <!-- DATOS PERSONALES -->
         <h2>📋 Datos Personales</h2>
-        <label>Nombre:</label>
-        <input type="text" id="nombre" placeholder="David">
-        <label>Alias:</label>
-        <input type="text" id="alias" placeholder="D4v1d">
-        <label>Email:</label>
-        <input type="email" id="email" placeholder="d4v1d@ejemplo.com">
-        <label>DeviantArt:</label>
-        <input type="url" id="deviantart" placeholder="https://www.deviantart.com/d4v1d">
-        <label>GitHub:</label>
-        <input type="url" id="github" placeholder="https://github.com/d4v1d">
-        <label>Habilidades (separadas por coma):</label>
-        <input type="text" id="habilidades" placeholder="C++, Pixel Art, SDL2, Aseprite">
-        <label>Biografía:</label>
-        <textarea id="biografia" placeholder="Cuéntanos sobre ti..."></textarea>
+        <label>Nombre:</label><input type="text" id="nombre">
+        <label>Alias:</label><input type="text" id="alias">
+        <label>Email:</label><input type="email" id="email">
+        <label>DeviantArt:</label><input type="url" id="deviantart">
+        <label>GitHub:</label><input type="url" id="github">
+        <label>Habilidades:</label><input type="text" id="habilidades">
+        <label>Biografía:</label><textarea id="biografia"></textarea>
         
-        <!-- PROYECTOS -->
         <h2>🎨 Proyectos</h2>
         <div id="lista-proyectos-admin"></div>
         <button class="btn-agregar" onclick="agregarProyecto()">+ Agregar Proyecto</button>
-        
-        <button onclick="generarArchivos()">💾 GENERAR ARCHIVOS PARA DESCARGAR</button>
+        <button onclick="generarArchivos()">💾 GENERAR ARCHIVOS</button>
         <div class="mensaje" id="mensaje">✅ ¡Archivos generados!</div>
 
-        <!-- GENERADOR DE MARCA DE AGUA -->
-        <div style="margin-top: 40px; padding: 20px; background: #0d0d1a; border: 2px solid #e63946;">
+        <div style="margin-top:40px;padding:20px;background:#0d0d1a;border:2px solid #e63946;">
             <h2 style="color:#e63946;">🔒 Generador de Marca de Agua</h2>
-            <p style="color:#aaa; font-size:0.7rem; margin:10px 0;">Sube una imagen y descárgala con la firma "D4v1d"</p>
-            <input type="file" id="marcaInput" accept="image/*" style="display:block; margin:15px auto; color:#fff;">
-            <canvas id="marcaCanvas" style="display:none; max-width:100%; margin:15px auto; border:1px solid #3b82f6;"></canvas>
-            <button id="marcaBtn" style="display:none; margin:10px auto; padding:10px 20px; background:#3b82f6; color:#fff; border:none; cursor:pointer; font-size:0.8rem;">💾 Descargar con Marca</button>
+            <p style="color:#aaa;font-size:0.7rem;margin:10px 0;">Sube una imagen y descárgala con tu marca</p>
+            <input type="file" id="marcaInput" accept="image/*" style="display:block;margin:15px auto;color:#fff;">
+            <canvas id="marcaCanvas" style="display:none;max-width:100%;margin:15px auto;border:1px solid #3b82f6;"></canvas>
+            <button id="marcaBtn" style="display:none;margin:10px auto;padding:10px 20px;background:#3b82f6;color:#fff;border:none;cursor:pointer;font-size:0.8rem;">💾 Descargar con Marca</button>
         </div>
     </div>
 
     <script>
-        // LOGIN
         const PASSWORD_CORRECTA = 'D4v1d01';
-        
+        let datos = {}, proyectos = [];
+
         function verificarPassword() {
-            const input = document.getElementById('passwordInput');
-            const error = document.getElementById('errorMsg');
-            if (input.value === PASSWORD_CORRECTA) {
+            if (document.getElementById('passwordInput').value === PASSWORD_CORRECTA) {
                 document.getElementById('loginPantalla').style.display = 'none';
                 document.getElementById('panelAdmin').style.display = 'block';
-                error.style.display = 'none';
+                document.getElementById('errorMsg').style.display = 'none';
                 cargarDatos();
             } else {
-                error.style.display = 'block';
-                input.value = '';
-                input.focus();
+                document.getElementById('errorMsg').style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
             }
         }
-        
+
         function cerrarSesion() {
             document.getElementById('loginPantalla').style.display = 'block';
             document.getElementById('panelAdmin').style.display = 'none';
             document.getElementById('passwordInput').value = '';
-            document.getElementById('mensaje').classList.remove('exito');
         }
-        
+
         document.getElementById('passwordInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') verificarPassword();
         });
-        
-        // DATOS
-        let datos = {};
-        let proyectos = [];
-        
+
         function cargarDatos() {
-            fetch('data/datos.json')
-                .then(res => res.json())
-                .then(data => {
-                    datos = data;
-                    document.getElementById('nombre').value = data.nombre || '';
-                    document.getElementById('alias').value = data.alias || '';
-                    document.getElementById('email').value = data.email || '';
-                    document.getElementById('deviantart').value = data.deviantart || '';
-                    document.getElementById('github').value = data.github || '';
-                    document.getElementById('habilidades').value = (data.habilidades || []).join(', ');
-                    document.getElementById('biografia').value = data.biografia || '';
-                })
-                .catch(() => {});
-            
-            fetch('data/proyectos.json')
-                .then(res => res.json())
-                .then(data => {
-                    proyectos = data;
-                    mostrarProyectos();
-                })
-                .catch(() => { proyectos = []; mostrarProyectos(); });
+            fetch('data/datos.json').then(r => r.json()).then(d => {
+                datos = d;
+                document.getElementById('nombre').value = d.nombre || '';
+                document.getElementById('alias').value = d.alias || '';
+                document.getElementById('email').value = d.email || '';
+                document.getElementById('deviantart').value = d.deviantart || '';
+                document.getElementById('github').value = d.github || '';
+                document.getElementById('habilidades').value = (d.habilidades || []).join(', ');
+                document.getElementById('biografia').value = d.biografia || '';
+            }).catch(() => {});
+            fetch('data/proyectos.json').then(r => r.json()).then(d => { proyectos = d; mostrarProyectos(); }).catch(() => { proyectos = []; mostrarProyectos(); });
         }
-        
+
         function mostrarProyectos() {
-            const contenedor = document.getElementById('lista-proyectos-admin');
-            contenedor.innerHTML = '';
-            proyectos.forEach((proy, index) => {
+            const c = document.getElementById('lista-proyectos-admin');
+            c.innerHTML = '';
+            proyectos.forEach((p, i) => {
                 const div = document.createElement('div');
                 div.className = 'proyecto-item';
                 div.innerHTML = `
-                    <label>Título:</label>
-                    <input type="text" class="proy-titulo" value="${proy.titulo || ''}">
-                    <label>Descripción:</label>
-                    <input type="text" class="proy-desc" value="${proy.descripcion || ''}">
-                    <label>Imagen:</label>
-                    <input type="text" class="proy-img" value="${proy.imagen || ''}">
-                    <label>Enlace:</label>
-                    <input type="url" class="proy-enlace" value="${proy.enlace || ''}">
-                    <label>Tipo:</label>
-                    <input type="text" class="proy-tipo" value="${proy.tipo || ''}">
-                    <button class="btn-eliminar" onclick="eliminarProyecto(${index})">🗑️ Eliminar proyecto</button>
-                `;
-                contenedor.appendChild(div);
+                    <label>Título:</label><input type="text" class="proy-titulo" value="${p.titulo||''}">
+                    <label>Descripción:</label><input type="text" class="proy-desc" value="${p.descripcion||''}">
+                    <label>Imagen:</label><input type="text" class="proy-img" value="${p.imagen||''}">
+                    <label>Enlace:</label><input type="url" class="proy-enlace" value="${p.enlace||''}">
+                    <label>Tipo:</label><input type="text" class="proy-tipo" value="${p.tipo||''}">
+                    <button class="btn-eliminar" onclick="eliminarProyecto(${i})">🗑️ Eliminar</button>`;
+                c.appendChild(div);
             });
         }
-        
-        function agregarProyecto() {
-            proyectos.push({ titulo: '', descripcion: '', imagen: '', enlace: '', tipo: 'pixel' });
-            mostrarProyectos();
-        }
-        
-        function eliminarProyecto(index) {
-            if (confirm('¿Eliminar este proyecto?')) {
-                proyectos.splice(index, 1);
-                mostrarProyectos();
-            }
-        }
-        
+
+        function agregarProyecto() { proyectos.push({titulo:'',descripcion:'',imagen:'',enlace:'',tipo:'pixel'}); mostrarProyectos(); }
+        function eliminarProyecto(i) { if(confirm('¿Eliminar?')) { proyectos.splice(i,1); mostrarProyectos(); } }
+
         function generarArchivos() {
-            const datosActualizados = {
-                nombre: document.getElementById('nombre').value,
-                alias: document.getElementById('alias').value,
-                email: document.getElementById('email').value,
-                deviantart: document.getElementById('deviantart').value,
-                github: document.getElementById('github').value,
-                habilidades: document.getElementById('habilidades').value.split(',').map(h => h.trim()),
-                biografia: document.getElementById('biografia').value
-            };
-            
-            const blobDatos = new Blob([JSON.stringify(datosActualizados, null, 4)], {type: 'application/json'});
-            const aDatos = document.createElement('a');
-            aDatos.href = URL.createObjectURL(blobDatos);
-            aDatos.download = 'datos.json';
-            aDatos.click();
-            
+            const d = { nombre: document.getElementById('nombre').value, alias: document.getElementById('alias').value, email: document.getElementById('email').value, deviantart: document.getElementById('deviantart').value, github: document.getElementById('github').value, habilidades: document.getElementById('habilidades').value.split(',').map(h=>h.trim()), biografia: document.getElementById('biografia').value };
+            const b1 = new Blob([JSON.stringify(d,null,4)],{type:'application/json'});
+            const a1 = document.createElement('a'); a1.href = URL.createObjectURL(b1); a1.download = 'datos.json'; a1.click();
             setTimeout(() => {
-                const proyectosActualizados = [];
-                document.querySelectorAll('.proyecto-item').forEach(item => {
-                    proyectosActualizados.push({
-                        titulo: item.querySelector('.proy-titulo').value,
-                        descripcion: item.querySelector('.proy-desc').value,
-                        imagen: item.querySelector('.proy-img').value,
-                        enlace: item.querySelector('.proy-enlace').value,
-                        tipo: item.querySelector('.proy-tipo').value
-                    });
-                });
-                const blobProyectos = new Blob([JSON.stringify(proyectosActualizados, null, 4)], {type: 'application/json'});
-                const aProyectos = document.createElement('a');
-                aProyectos.href = URL.createObjectURL(blobProyectos);
-                aProyectos.download = 'proyectos.json';
-                aProyectos.click();
+                const proy = []; document.querySelectorAll('.proyecto-item').forEach(it => proy.push({ titulo: it.querySelector('.proy-titulo').value, descripcion: it.querySelector('.proy-desc').value, imagen: it.querySelector('.proy-img').value, enlace: it.querySelector('.proy-enlace').value, tipo: it.querySelector('.proy-tipo').value }));
+                const b2 = new Blob([JSON.stringify(proy,null,4)],{type:'application/json'});
+                const a2 = document.createElement('a'); a2.href = URL.createObjectURL(b2); a2.download = 'proyectos.json'; a2.click();
                 document.getElementById('mensaje').classList.add('exito');
                 setTimeout(() => document.getElementById('mensaje').classList.remove('exito'), 5000);
             }, 500);
         }
 
-                // GENERADOR DE MARCA DE AGUA CON IMAGEN
+        // GENERADOR DE MARCA DE AGUA
         const marcaInput = document.getElementById('marcaInput');
         const marcaCanvas = document.getElementById('marcaCanvas');
         const marcaCtx = marcaCanvas.getContext('2d');
         const marcaBtn = document.getElementById('marcaBtn');
-
-        // Cargar la imagen de la marca de agua
         const marcaAgua = new Image();
         marcaAgua.src = 'img/icono.png';
 
@@ -447,22 +173,12 @@
                     marcaCanvas.width = img.width;
                     marcaCanvas.height = img.height;
                     marcaCtx.drawImage(img, 0, 0);
-                    
-                    // Tamaño de la marca de agua (15% del ancho de la imagen)
-                    const tamanoMarca = Math.max(img.width * 0.15, 80);
-                    const proporcion = marcaAgua.width / marcaAgua.height;
-                    const anchoMarca = tamanoMarca;
-                    const altoMarca = tamanoMarca / proporcion;
-                    
-                    // Posición: esquina inferior derecha
-                    const x = img.width - anchoMarca - 20;
-                    const y = img.height - altoMarca - 20;
-                    
-                    // Dibujar la marca de agua con transparencia
+                    const tam = Math.max(img.width * 0.15, 80);
+                    const prop = marcaAgua.width / marcaAgua.height;
+                    const ancho = tam, alto = tam / prop;
                     marcaCtx.globalAlpha = 0.7;
-                    marcaCtx.drawImage(marcaAgua, x, y, anchoMarca, altoMarca);
+                    marcaCtx.drawImage(marcaAgua, img.width - ancho - 20, img.height - alto - 20, ancho, alto);
                     marcaCtx.globalAlpha = 1;
-                    
                     marcaCanvas.style.display = 'block';
                     marcaBtn.style.display = 'block';
                 };
@@ -477,3 +193,6 @@
             enlace.href = marcaCanvas.toDataURL('image/png');
             enlace.click();
         });
+    </script>
+</body>
+</html>
