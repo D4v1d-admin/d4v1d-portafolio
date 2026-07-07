@@ -58,5 +58,20 @@
         }
     });
 </script>
+    <!-- Botón volver arriba -->
+<button class="btn-volver-arriba" id="btnVolverArriba" title="Volver arriba">⬆</button>
+<script>
+    const btnVolver = document.getElementById('btnVolverArriba');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            btnVolver.classList.add('visible');
+        } else {
+            btnVolver.classList.remove('visible');
+        }
+    });
+    btnVolver.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 </body>
 </html>
