@@ -113,5 +113,48 @@
             });
         }
     </script>
+    <!-- Testimonios -->
+<div class="testimonios">
+    <h2>⭐ Lo que dicen mis clientes</h2>
+    <div class="testimonios-grid" id="testimoniosGrid">
+        <!-- Se llena con JavaScript -->
+    </div>
+</div>
+
+<script>
+    const testimonios = [
+        {
+            estrellas: 5,
+            texto: "Excelente trabajo en el personaje para MUGEN. Muy profesional y entregado a tiempo.",
+            cliente: "Cliente 1",
+            proyecto: "Personaje MUGEN"
+        },
+        {
+            estrellas: 5,
+            texto: "Las animaciones pixel art quedaron increíbles. Superó mis expectativas.",
+            cliente: "Cliente 2",
+            proyecto: "Pixel Art Animation"
+        },
+        {
+            estrellas: 4,
+            texto: "Muy buen programador en C++, resolvió todos los bugs rápidamente.",
+            cliente: "Cliente 3",
+            proyecto: "C++ Development"
+        }
+    ];
+
+    const grid = document.getElementById('testimoniosGrid');
+    testimonios.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'testimonio-card';
+        card.innerHTML = `
+            <div class="estrellas">${'⭐'.repeat(t.estrellas)}</div>
+            <p>"${t.texto}"</p>
+            <div class="cliente">- ${t.cliente}</div>
+            <div class="proyecto">${t.proyecto}</div>
+        `;
+        grid.appendChild(card);
+    });
+</script>
 </body>
 </html>
