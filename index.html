@@ -187,6 +187,11 @@
             comida.y = Math.floor(Math.random() * (canvas.height / gridSize));
         }
 
+                dir = {x: 0, y: 0};
+        snake = [{x: 10, y: 10}];
+        puntos = 0;
+        document.getElementById('puntosSnake').textContent = '0';
+
         clearInterval(intervaloSnake);
         intervaloSnake = setInterval(() => {
             const cabeza = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
