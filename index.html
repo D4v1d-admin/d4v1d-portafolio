@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
+
+    <!-- Pantalla de carga -->
+    <div class="loader" id="loader">
+        <div class="pixel-carga">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <p>Cargando...</p>
+    </div>
+
     <canvas id="fondoCanvas"></canvas>
 
     <!-- Toggle modo oscuro/claro -->
@@ -41,6 +50,13 @@
     </div>
 
     <script>
+        // Ocultar loader al cargar
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('oculto');
+            }, 500);
+        });
+
         // Protección anti-copia
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
         document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
