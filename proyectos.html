@@ -15,6 +15,15 @@
     </style>
 </head>
 <body class="pagina-interior">
+
+    <!-- Pantalla de carga -->
+    <div class="loader" id="loader">
+        <div class="pixel-carga">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <p>Cargando...</p>
+    </div>
+
     <canvas id="fondoCanvas"></canvas>
 
     <!-- Toggle modo oscuro/claro -->
@@ -35,9 +44,22 @@
     <!-- Botón volver arriba -->
     <button class="btn-volver-arriba" id="btnVolverArriba" title="Volver arriba">⬆</button>
 
+    <!-- Lightbox para zoom -->
+    <div class="lightbox" id="lightbox">
+        <span class="cerrar" id="cerrarLightbox">✕</span>
+        <img src="" alt="Zoom" id="imagenLightbox">
+    </div>
+
     <script src="js/particulas.js"></script>
     <script src="js/cargar-proyectos.js"></script>
     <script>
+        // Ocultar loader al cargar
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('oculto');
+            }, 500);
+        });
+
         // Protección anti-copia
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
         document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
@@ -80,41 +102,33 @@
                 }
             });
         }
-    </script>
-    <!-- Lightbox para zoom -->
-<div class="lightbox" id="lightbox">
-    <span class="cerrar" id="cerrarLightbox">✕</span>
-    <img src="" alt="Zoom" id="imagenLightbox">
-</div>
 
-<script>
-    // Zoom en imágenes de proyectos
-    document.addEventListener('click', function(e) {
-        if (e.target.closest('.img-container img')) {
-            const img = e.target.closest('.img-container img');
-            const lightbox = document.getElementById('lightbox');
-            const imgZoom = document.getElementById('imagenLightbox');
-            imgZoom.src = img.src;
-            lightbox.classList.add('activo');
-        }
-    });
+        // Zoom en imágenes
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.img-container img')) {
+                const img = e.target.closest('.img-container img');
+                const lightbox = document.getElementById('lightbox');
+                const imgZoom = document.getElementById('imagenLightbox');
+                imgZoom.src = img.src;
+                lightbox.classList.add('activo');
+            }
+        });
 
-    document.getElementById('cerrarLightbox').addEventListener('click', function() {
-        document.getElementById('lightbox').classList.remove('activo');
-    });
-
-    document.getElementById('lightbox').addEventListener('click', function(e) {
-        if (e.target === this) {
-            this.classList.remove('activo');
-        }
-    });
-
-    // Cerrar con tecla Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
+        document.getElementById('cerrarLightbox').addEventListener('click', function() {
             document.getElementById('lightbox').classList.remove('activo');
-        }
-    });
-</script>
+        });
+
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('activo');
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('lightbox').classList.remove('activo');
+            }
+        });
+    </script>
 </body>
 </html>
