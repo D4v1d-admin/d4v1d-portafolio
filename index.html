@@ -27,6 +27,16 @@
     <script src="js/particulas.js"></script>
    <!-- Botón secreto: aparece al pasar el mouse en la esquina inferior derecha -->
 <a href="admin.html" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background-color: transparent; z-index: 999; display: block; opacity: 0; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'" title="Admin">🔐</a>
-    
+    <script>
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'PrintScreen' || (e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'p') || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+            e.preventDefault();
+            alert('🚫 Esta acción está deshabilitada para proteger el contenido.');
+            return false;
+        }
+    });
+</script>
 </body>
 </html>
