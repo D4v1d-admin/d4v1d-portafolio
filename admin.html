@@ -95,6 +95,7 @@
             if (document.getElementById('passwordInput').value === PASSWORD_CORRECTA) {
                 document.getElementById('loginPantalla').style.display = 'none';
                 document.getElementById('panelAdmin').style.display = 'block';
+                localStorage.setItem('esAdminD4v1d', '1');
                 document.getElementById('errorMsg').style.display = 'none';
                 localStorage.setItem('esAdminD4v1d', '1');
                 cargarDatos();
