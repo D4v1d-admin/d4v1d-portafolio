@@ -544,3 +544,64 @@ body.modo-claro .btn-volver-arriba {
     font-size: 0.6rem;
     animation: flicker 1s infinite;
 }
+/* === TESTIMONIOS === */
+.testimonios {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.testimonios h2 {
+    text-align: center;
+    color: #3b82f6;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #3b82f6;
+}
+
+.testimonios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.testimonio-card {
+    background: rgba(30, 58, 138, 0.2);
+    border: 2px solid #3b82f6;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.testimonio-card:hover {
+    border-color: #e63946;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+.testimonio-card .estrellas {
+    color: #f1c40f;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.testimonio-card p {
+    font-size: 0.55rem;
+    color: #cccccc;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.testimonio-card .cliente {
+    color: #3b82f6;
+    font-size: 0.5rem;
+    font-weight: bold;
+}
+
+.testimonio-card .proyecto {
+    color: #e63946;
+    font-size: 0.45rem;
+    margin-top: 5px;
+}
