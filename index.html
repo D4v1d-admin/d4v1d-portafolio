@@ -58,12 +58,26 @@
     👁 <span id="contadorVisitas">0</span>
 </div>
 <script>
-    // Contador de visitas con localStorage
-    let visitas = localStorage.getItem('visitasD4v1d');
-    if (!visitas) visitas = 1;
-    else visitas = parseInt(visitas) + 1;
-    localStorage.setItem('visitasD4v1d', visitas);
-    document.getElementById('contadorVisitas').textContent = visitas;
+<!-- Contador de visitas -->
+<div class="contador-visitas">
+    👁 <span id="contadorVisitas">0</span>
+</div>
+<script>
+    // Contador con localStorage (no cuenta al admin)
+    function cargarContador() {
+        let visitas = localStorage.getItem('visitasD4v1d');
+        if (!visitas) visitas = 0;
+        document.getElementById('contadorVisitas').textContent = visitas;
+    }
+    
+    // Solo suma si NO es el admin (detecta por cookie/localStorage)
+    if (!localStorage.getItem('esAdminD4v1d')) {
+        let visitas = localStorage.getItem('visitasD4v1d');
+        if (!visitas) visitas = 0;
+        else visitas = parseInt(visitas);
+        visitas = visitas + 1;
+        localStorage.setItem('visitasD4v1d', visitas);
+    }
+    
+    cargarContador();
 </script>
-</body>
-</html>
