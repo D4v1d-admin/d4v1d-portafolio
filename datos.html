@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="css/estilo.css?v=2">
 </head>
 <body class="pagina-interior">
+
+    <!-- Pantalla de carga -->
+    <div class="loader" id="loader">
+        <div class="pixel-carga">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <p>Cargando...</p>
+    </div>
+
     <canvas id="fondoCanvas"></canvas>
 
     <!-- Toggle modo oscuro/claro -->
@@ -30,6 +39,13 @@
 
     <script src="js/particulas.js"></script>
     <script>
+        // Ocultar loader al cargar
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('oculto');
+            }, 500);
+        });
+
         // Cargar datos
         fetch('data/datos.json')
             .then(res => res.json())
