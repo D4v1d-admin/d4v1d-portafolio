@@ -199,9 +199,20 @@
                         if (dir.x === 0 && dir.y === 0) {
                 // No moverse, esperar primera tecla
             } else if (cabeza.x < 0 || cabeza.x >= canvas.width/gridSize || cabeza.y < 0 || cabeza.y >= canvas.height/gridSize || snake.some(s => s.x === cabeza.x && s.y === cabeza.y)) {
-                ctx.fillStyle = '#e63946';
-                ctx.font = '20px "Press Start 2P"';
-                ctx.fillText('GAME OVER', 50, 200);
+                                ctx.fillStyle = '#e63946';
+                ctx.font = '16px "Press Start 2P"';
+                ctx.fillText('GAME OVER', 60, 180);
+                ctx.fillStyle = '#3b82f6';
+                ctx.font = '10px "Press Start 2P"';
+                ctx.fillText('Presiona ESPACIO', 40, 210);
+                ctx.fillText('para reiniciar', 55, 230);
+                document.addEventListener('keydown', function reiniciar(e) {
+                    if (e.key === ' ') {
+                        e.preventDefault();
+                        document.removeEventListener('keydown', reiniciar);
+                        iniciarSnake();
+                    }
+                });
                 return;
             }
 
