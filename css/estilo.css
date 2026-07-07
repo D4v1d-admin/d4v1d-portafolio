@@ -605,3 +605,9 @@ body.modo-claro .btn-volver-arriba {
     font-size: 0.45rem;
     margin-top: 5px;
 }
+@keyframes rainbow {
+    0%, 100% { background-color: #0a0a0a; }
+    25% { background-color: #1a0033; }
+    50% { background-color: #00331a; }
+    75% { background-color: #331a00; }
+}
