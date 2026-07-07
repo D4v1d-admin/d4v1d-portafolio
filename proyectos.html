@@ -16,6 +16,9 @@
 </head>
 <body class="pagina-interior">
     <canvas id="fondoCanvas"></canvas>
+
+    <!-- Toggle modo oscuro/claro -->
+    <button id="toggleModo" style="position:fixed;top:80px;right:20px;z-index:9999;background:#1e3a8a;border:2px solid #3b82f6;color:#fff;padding:8px 12px;border-radius:50%;cursor:pointer;font-size:1.2rem;width:40px;height:40px;display:flex;align-items:center;justify-content:center;" title="Cambiar modo">🌙</button>
     
     <h1>🎨 Mis Proyectos</h1>
     
@@ -29,7 +32,13 @@
         <!-- Se llena con JavaScript -->
     </main>
 
-        <script>
+    <!-- Botón volver arriba -->
+    <button class="btn-volver-arriba" id="btnVolverArriba" title="Volver arriba">⬆</button>
+
+    <script src="js/particulas.js"></script>
+    <script src="js/cargar-proyectos.js"></script>
+    <script>
+        // Protección anti-copia
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
         document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
         document.addEventListener('keydown', function(e) {
@@ -39,41 +48,38 @@
                 return false;
             }
         });
+
+        // Botón volver arriba
+        const btnVolver = document.getElementById('btnVolverArriba');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                btnVolver.classList.add('visible');
+            } else {
+                btnVolver.classList.remove('visible');
+            }
+        });
+        btnVolver.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Modo oscuro/claro
+        const toggleModo = document.getElementById('toggleModo');
+        if (toggleModo) {
+            if (localStorage.getItem('modoClaro') === '1') {
+                document.body.classList.add('modo-claro');
+                toggleModo.textContent = '☀️';
+            }
+            toggleModo.addEventListener('click', function() {
+                document.body.classList.toggle('modo-claro');
+                if (document.body.classList.contains('modo-claro')) {
+                    localStorage.setItem('modoClaro', '1');
+                    toggleModo.textContent = '☀️';
+                } else {
+                    localStorage.setItem('modoClaro', '0');
+                    toggleModo.textContent = '🌙';
+                }
+            });
+        }
     </script>
-    <script src="js/particulas.js"></script>
-    <script src="js/cargar-proyectos.js"></script>
-    <!-- Botón volver arriba -->
-<button class="btn-volver-arriba" id="btnVolverArriba" title="Volver arriba">⬆</button>
-<script>
-    const btnVolver = document.getElementById('btnVolverArriba');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            btnVolver.classList.add('visible');
-        } else {
-            btnVolver.classList.remove('visible');
-        }
-    });
-    btnVolver.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-</script>
-    // Modo oscuro/claro
-const toggleModo = document.getElementById('toggleModo');
-if (toggleModo) {
-    if (localStorage.getItem('modoClaro') === '1') {
-        document.body.classList.add('modo-claro');
-        toggleModo.textContent = '☀️';
-    }
-    toggleModo.addEventListener('click', function() {
-        document.body.classList.toggle('modo-claro');
-        if (document.body.classList.contains('modo-claro')) {
-            localStorage.setItem('modoClaro', '1');
-            toggleModo.textContent = '☀️';
-        } else {
-            localStorage.setItem('modoClaro', '0');
-            toggleModo.textContent = '🌙';
-        }
-    });
-}
 </body>
 </html>
