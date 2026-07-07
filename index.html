@@ -196,8 +196,9 @@
         intervaloSnake = setInterval(() => {
             const cabeza = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
 
-            if (cabeza.x < 0 || cabeza.x >= canvas.width/gridSize || cabeza.y < 0 || cabeza.y >= canvas.height/gridSize || snake.some(s => s.x === cabeza.x && s.y === cabeza.y)) {
-                clearInterval(intervaloSnake);
+                        if (dir.x === 0 && dir.y === 0) {
+                // No moverse, esperar primera tecla
+            } else if (cabeza.x < 0 || cabeza.x >= canvas.width/gridSize || cabeza.y < 0 || cabeza.y >= canvas.height/gridSize || snake.some(s => s.x === cabeza.x && s.y === cabeza.y)) {
                 ctx.fillStyle = '#e63946';
                 ctx.font = '20px "Press Start 2P"';
                 ctx.fillText('GAME OVER', 50, 200);
