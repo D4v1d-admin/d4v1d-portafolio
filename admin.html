@@ -79,6 +79,12 @@
             <canvas id="marcaCanvas" style="display:none;max-width:100%;margin:15px auto;border:1px solid #3b82f6;"></canvas>
             <button id="marcaBtn" style="display:none;margin:10px auto;padding:10px 20px;background:#3b82f6;color:#fff;border:none;cursor:pointer;font-size:0.8rem;">💾 Descargar con Marca</button>
         </div>
+
+        <div style="margin-top:30px; padding:15px; background:#0d0d1a; border:1px solid #e63946; text-align:center;">
+            <p style="color:#e63946; margin-bottom:10px;">🔄 Reiniciar Contador de Visitas</p>
+            <p style="color:#aaa; font-size:0.7rem;">Visitas actuales: <span id="visitasActuales">0</span></p>
+            <button onclick="reiniciarContador()" style="background:#e63946; padding:8px 20px; font-size:0.8rem; margin-top:10px;">Reiniciar a 0</button>
+        </div>
     </div>
 
     <script>
@@ -90,7 +96,11 @@
                 document.getElementById('loginPantalla').style.display = 'none';
                 document.getElementById('panelAdmin').style.display = 'block';
                 document.getElementById('errorMsg').style.display = 'none';
+                localStorage.setItem('esAdminD4v1d', '1');
                 cargarDatos();
+                // Mostrar visitas actuales
+                let v = localStorage.getItem('visitasD4v1d') || 0;
+                document.getElementById('visitasActuales').textContent = v;
             } else {
                 document.getElementById('errorMsg').style.display = 'block';
                 document.getElementById('passwordInput').value = '';
@@ -102,6 +112,7 @@
             document.getElementById('loginPantalla').style.display = 'block';
             document.getElementById('panelAdmin').style.display = 'none';
             document.getElementById('passwordInput').value = '';
+            localStorage.removeItem('esAdminD4v1d');
         }
 
         document.getElementById('passwordInput').addEventListener('keypress', function(e) {
@@ -153,6 +164,14 @@
                 document.getElementById('mensaje').classList.add('exito');
                 setTimeout(() => document.getElementById('mensaje').classList.remove('exito'), 5000);
             }, 500);
+        }
+
+        function reiniciarContador() {
+            if (confirm('¿Seguro que quieres reiniciar el contador a 0?')) {
+                localStorage.setItem('visitasD4v1d', '0');
+                document.getElementById('visitasActuales').textContent = '0';
+                alert('✅ Contador reiniciado');
+            }
         }
 
         // GENERADOR DE MARCA DE AGUA
