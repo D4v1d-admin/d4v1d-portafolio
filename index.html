@@ -53,5 +53,17 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 </script>
+    <!-- Contador de visitas -->
+<div class="contador-visitas">
+    👁 <span id="contadorVisitas">0</span>
+</div>
+<script>
+    // Contador de visitas con localStorage
+    let visitas = localStorage.getItem('visitasD4v1d');
+    if (!visitas) visitas = 1;
+    else visitas = parseInt(visitas) + 1;
+    localStorage.setItem('visitasD4v1d', visitas);
+    document.getElementById('contadorVisitas').textContent = visitas;
+</script>
 </body>
 </html>
