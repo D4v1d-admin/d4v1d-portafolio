@@ -451,3 +451,45 @@ body.modo-claro .btn-volver-arriba {
         padding: 100px 15px 40px 15px;
     }
 }
+/* === ZOOM EN GALERÍA === */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.lightbox.activo {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border: 3px solid #3b82f6;
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+    image-rendering: pixelated;
+}
+
+.lightbox .cerrar {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #e63946;
+    font-size: 2rem;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    z-index: 10001;
+}
+
+.lightbox .cerrar:hover {
+    color: #ff6b6b;
+    text-shadow: 0 0 10px #e63946;
+}
