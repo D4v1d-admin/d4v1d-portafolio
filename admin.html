@@ -427,11 +427,15 @@
             }, 500);
         }
 
-        // GENERADOR DE MARCA DE AGUA
+                // GENERADOR DE MARCA DE AGUA CON IMAGEN
         const marcaInput = document.getElementById('marcaInput');
         const marcaCanvas = document.getElementById('marcaCanvas');
         const marcaCtx = marcaCanvas.getContext('2d');
         const marcaBtn = document.getElementById('marcaBtn');
+
+        // Cargar la imagen de la marca de agua
+        const marcaAgua = new Image();
+        marcaAgua.src = 'img/icono.png';
 
         marcaInput.addEventListener('change', function(e) {
             const archivo = e.target.files[0];
@@ -443,15 +447,22 @@
                     marcaCanvas.width = img.width;
                     marcaCanvas.height = img.height;
                     marcaCtx.drawImage(img, 0, 0);
-                    const fontSize = Math.max(img.width * 0.05, 20);
-                    marcaCtx.font = `bold ${fontSize}px Courier New, monospace`;
-                    marcaCtx.fillStyle = 'rgba(59, 130, 246, 0.7)';
-                    marcaCtx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
-                    marcaCtx.lineWidth = 3;
-                    const texto = 'D4v1d';
-                    const m = marcaCtx.measureText(texto);
-                    marcaCtx.strokeText(texto, img.width - m.width - 20, img.height - 20);
-                    marcaCtx.fillText(texto, img.width - m.width - 20, img.height - 20);
+                    
+                    // Tamaño de la marca de agua (15% del ancho de la imagen)
+                    const tamanoMarca = Math.max(img.width * 0.15, 80);
+                    const proporcion = marcaAgua.width / marcaAgua.height;
+                    const anchoMarca = tamanoMarca;
+                    const altoMarca = tamanoMarca / proporcion;
+                    
+                    // Posición: esquina inferior derecha
+                    const x = img.width - anchoMarca - 20;
+                    const y = img.height - altoMarca - 20;
+                    
+                    // Dibujar la marca de agua con transparencia
+                    marcaCtx.globalAlpha = 0.7;
+                    marcaCtx.drawImage(marcaAgua, x, y, anchoMarca, altoMarca);
+                    marcaCtx.globalAlpha = 1;
+                    
                     marcaCanvas.style.display = 'block';
                     marcaBtn.style.display = 'block';
                 };
@@ -466,6 +477,3 @@
             enlace.href = marcaCanvas.toDataURL('image/png');
             enlace.click();
         });
-    </script>
-</body>
-</html>
