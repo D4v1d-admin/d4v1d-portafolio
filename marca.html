@@ -21,7 +21,7 @@
 </head>
 <body>
     <h1>🔒 Generador de Marca de Agua</h1>
-    <p>Sube tu imagen y descárgala con la marca "D4v1d"</p>
+    <p>Sube tu imagen y descárgala con tu marca personal</p>
     
     <input type="file" id="inputImagen" accept="image/*">
     <br>
@@ -34,6 +34,10 @@
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         const btn = document.getElementById('btnDescargar');
+        
+        // Cargar imagen de marca de agua
+        const marcaAgua = new Image();
+        marcaAgua.src = 'img/marca-de-agua.png';
 
         input.addEventListener('change', function(e) {
             const archivo = e.target.files[0];
@@ -47,19 +51,14 @@
                     canvas.height = img.height;
                     ctx.drawImage(img, 0, 0);
                     
-                    const fontSize = Math.max(img.width * 0.05, 20);
-                    ctx.font = `bold ${fontSize}px Courier New, monospace`;
-                    ctx.fillStyle = 'rgba(59, 130, 246, 0.7)';
-                    ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
-                    ctx.lineWidth = 3;
+                    const tam = Math.max(img.width * 0.15, 80);
+                    const prop = marcaAgua.width / marcaAgua.height;
+                    const ancho = tam;
+                    const alto = tam / prop;
                     
-                    const texto = 'D4v1d';
-                    const m = ctx.measureText(texto);
-                    const x = img.width - m.width - 20;
-                    const y = img.height - 20;
-                    
-                    ctx.strokeText(texto, x, y);
-                    ctx.fillText(texto, x, y);
+                    ctx.globalAlpha = 0.7;
+                    ctx.drawImage(marcaAgua, img.width - ancho - 20, img.height - alto - 20, ancho, alto);
+                    ctx.globalAlpha = 1;
                     
                     canvas.style.display = 'block';
                     btn.style.display = 'inline-block';
