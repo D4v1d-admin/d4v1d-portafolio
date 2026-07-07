@@ -10,6 +10,9 @@
 <body>
     <canvas id="fondoCanvas"></canvas>
 
+    <!-- Toggle modo oscuro/claro -->
+    <button id="toggleModo" style="position:fixed;top:80px;right:20px;z-index:9999;background:#1e3a8a;border:2px solid #3b82f6;color:#fff;padding:8px 12px;border-radius:50%;cursor:pointer;font-size:1.2rem;width:40px;height:40px;display:flex;align-items:center;justify-content:center;" title="Cambiar modo">🌙</button>
+
     <header class="hero">
         <div class="logo-container">
             <img src="img/logo.png" alt="D4v1d" class="logo-img" id="avatarParpadeo">
@@ -87,6 +90,25 @@
             });
             avatar.addEventListener('mouseleave', function() {
                 this.style.animation = 'parpadeo 6s infinite';
+            });
+        }
+
+        // Modo oscuro/claro
+        const toggleModo = document.getElementById('toggleModo');
+        if (toggleModo) {
+            if (localStorage.getItem('modoClaro') === '1') {
+                document.body.classList.add('modo-claro');
+                toggleModo.textContent = '☀️';
+            }
+            toggleModo.addEventListener('click', function() {
+                document.body.classList.toggle('modo-claro');
+                if (document.body.classList.contains('modo-claro')) {
+                    localStorage.setItem('modoClaro', '1');
+                    toggleModo.textContent = '☀️';
+                } else {
+                    localStorage.setItem('modoClaro', '0');
+                    toggleModo.textContent = '🌙';
+                }
             });
         }
     </script>
