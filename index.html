@@ -12,72 +12,83 @@
 
     <header class="hero">
         <div class="logo-container">
-    <img src="img/logo.png" alt="D4v1d" class="logo-img" id="avatarParpadeo">
-    <h1 class="nombre">D4v1d</h1>
-</div>
-       <p class="subtitulo">Animador de Personajes MUGEN • Pixel Art • Programador C++</p>
+            <img src="img/logo.png" alt="D4v1d" class="logo-img" id="avatarParpadeo">
+            <h1 class="nombre">D4v1d</h1>
+        </div>
+        <p class="subtitulo">Animador de Personajes MUGEN • Pixel Art • Programador C++</p>
         
-    <nav class="menu">
-    <a href="index.html" class="activa">🏠 Inicio</a>
-    <a href="proyectos.html">🎨 Proyectos</a>
-    <a href="datos.html">📋 Datos</a>
+        <nav class="menu">
+            <a href="index.html" class="activa">🏠 Inicio</a>
+            <a href="proyectos.html">🎨 Proyectos</a>
+            <a href="datos.html">📋 Datos</a>
         </nav>
     </header>
 
     <script src="js/particulas.js"></script>
-   <!-- Botón secreto: aparece al pasar el mouse en la esquina inferior derecha -->
-<a href="admin.html" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background-color: transparent; z-index: 999; display: block; opacity: 0; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'" title="Admin">🔐</a>
-    <script>
-    document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
-    document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'PrintScreen' || (e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'p') || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
-            e.preventDefault();
-            alert('🚫 Esta acción está deshabilitada para proteger el contenido.');
-            return false;
-        }
-    });
-</script>
+
+    <!-- Botón secreto admin -->
+    <a href="admin.html" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background-color: transparent; z-index: 999; display: block; opacity: 0; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'" title="Admin">🔐</a>
+
     <!-- Botón volver arriba -->
-<button class="btn-volver-arriba" id="btnVolverArriba" title="Volver arriba">⬆</button>
-<script>
-    const btnVolver = document.getElementById('btnVolverArriba');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            btnVolver.classList.add('visible');
-        } else {
-            btnVolver.classList.remove('visible');
-        }
-    });
-    btnVolver.addEventListener('click', function() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-</script>
+    <button class="btn-volver-arriba" id="btnVolverArriba" title="Volver arriba">⬆</button>
+
     <!-- Contador de visitas -->
-<div class="contador-visitas">
-    👁 <span id="contadorVisitas">0</span>
-</div>
-<script>
-<!-- Contador de visitas -->
-<div class="contador-visitas">
-    👁 <span id="contadorVisitas">0</span>
-</div>
-<script>
-    // Contador con localStorage (no cuenta al admin)
-    function cargarContador() {
-        let visitas = localStorage.getItem('visitasD4v1d');
-        if (!visitas) visitas = 0;
-        document.getElementById('contadorVisitas').textContent = visitas;
-    }
-    
-    // Solo suma si NO es el admin (detecta por cookie/localStorage)
-    if (!localStorage.getItem('esAdminD4v1d')) {
-        let visitas = localStorage.getItem('visitasD4v1d');
-        if (!visitas) visitas = 0;
-        else visitas = parseInt(visitas);
-        visitas = visitas + 1;
-        localStorage.setItem('visitasD4v1d', visitas);
-    }
-    
-    cargarContador();
-</script>
+    <div class="contador-visitas">
+        👁 <span id="contadorVisitas">0</span>
+    </div>
+
+    <script>
+        // Protección anti-copia
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
+        document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'PrintScreen' || (e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'p') || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+                e.preventDefault();
+                alert('🚫 Esta acción está deshabilitada para proteger el contenido.');
+                return false;
+            }
+        });
+
+        // Botón volver arriba
+        const btnVolver = document.getElementById('btnVolverArriba');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                btnVolver.classList.add('visible');
+            } else {
+                btnVolver.classList.remove('visible');
+            }
+        });
+        btnVolver.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Contador de visitas (no cuenta al admin)
+        function cargarContador() {
+            let visitas = localStorage.getItem('visitasD4v1d');
+            if (!visitas) visitas = 0;
+            document.getElementById('contadorVisitas').textContent = visitas;
+        }
+        
+        if (!localStorage.getItem('esAdminD4v1d')) {
+            let visitas = localStorage.getItem('visitasD4v1d');
+            if (!visitas) visitas = 0;
+            else visitas = parseInt(visitas);
+            visitas = visitas + 1;
+            localStorage.setItem('visitasD4v1d', visitas);
+        }
+        
+        cargarContador();
+
+        // Avatar que parpadea
+        const avatar = document.getElementById('avatarParpadeo');
+        if (avatar) {
+            avatar.addEventListener('mouseenter', function() {
+                this.style.animation = 'none';
+            });
+            avatar.addEventListener('mouseleave', function() {
+                this.style.animation = 'parpadeo 6s infinite';
+            });
+        }
+    </script>
+</body>
+</html>
