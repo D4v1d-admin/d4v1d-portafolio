@@ -611,3 +611,44 @@ body.modo-claro .btn-volver-arriba {
     50% { background-color: #00331a; }
     75% { background-color: #331a00; }
 }
+/* === MINI JUEGO SNAKE === */
+.juego-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.juego-overlay.activo {
+    display: flex;
+}
+
+.juego-overlay canvas {
+    border: 2px solid #3b82f6;
+    box-shadow: 0 0 20px rgba(59,130,246,0.5);
+    image-rendering: pixelated;
+}
+
+.juego-puntos {
+    color: #3b82f6;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+}
+
+.juego-cerrar {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #e63946;
+    font-size: 2rem;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+}
