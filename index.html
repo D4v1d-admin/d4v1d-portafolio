@@ -153,8 +153,8 @@
 
 <script>
     // Activar juego con doble clic en el nombre
-    let clicksJuego = 0;
-    document.querySelector('.nombre').addEventListener('click', function() {
+        let clicksJuego = 0;
+    document.getElementById('avatarParpadeo').addEventListener('click', function() {
         clicksJuego++;
         if (clicksJuego >= 2) {
             document.getElementById('juegoOverlay').classList.add('activo');
