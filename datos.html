@@ -54,7 +54,7 @@
                 contenedor.innerHTML = `
                     <p><strong>Nombre:</strong> ${datos.nombre}</p>
                     <p><strong>Alias:</strong> ${datos.alias}</p>
-                    <p><strong>Email:</strong> ${datos.email}</p>
+                    <p><strong>Email:</strong> ${datos.email} <button onclick="navigator.clipboard.writeText('${datos.email}'); this.textContent='✅ Copiado!'; setTimeout(()=>this.textContent='📋 Copiar',2000);" style="display:inline;background:#3b82f6;color:#fff;border:none;padding:4px 10px;font-size:0.5rem;cursor:pointer;font-family:'Press Start 2P',monospace;margin-left:8px;">📋 Copiar</button></p>
                     <p><strong>DeviantArt:</strong> <a href="${datos.deviantart}" target="_blank">${datos.deviantart}</a></p>
                     <p><strong>GitHub:</strong> <a href="${datos.github}" target="_blank">${datos.github}</a></p>
                     <p><strong>Habilidades:</strong> ${datos.habilidades.join(', ')}</p>
