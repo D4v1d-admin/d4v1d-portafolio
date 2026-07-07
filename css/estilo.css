@@ -337,7 +337,8 @@ body {
 .contador-visitas {
     position: fixed;
     bottom: 25px;
-    right: 25px;
+    right: 70px;
+    z-index: 999;
     background: rgba(10, 10, 10, 0.85);
     border: 1.5px solid #3b82f6;
     border-radius: 30px;
