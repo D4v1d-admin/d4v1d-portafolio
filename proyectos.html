@@ -81,5 +81,40 @@
             });
         }
     </script>
+    <!-- Lightbox para zoom -->
+<div class="lightbox" id="lightbox">
+    <span class="cerrar" id="cerrarLightbox">✕</span>
+    <img src="" alt="Zoom" id="imagenLightbox">
+</div>
+
+<script>
+    // Zoom en imágenes de proyectos
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.img-container img')) {
+            const img = e.target.closest('.img-container img');
+            const lightbox = document.getElementById('lightbox');
+            const imgZoom = document.getElementById('imagenLightbox');
+            imgZoom.src = img.src;
+            lightbox.classList.add('activo');
+        }
+    });
+
+    document.getElementById('cerrarLightbox').addEventListener('click', function() {
+        document.getElementById('lightbox').classList.remove('activo');
+    });
+
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('activo');
+        }
+    });
+
+    // Cerrar con tecla Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.getElementById('lightbox').classList.remove('activo');
+        }
+    });
+</script>
 </body>
 </html>
