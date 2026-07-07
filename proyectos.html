@@ -62,24 +62,23 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Modo oscuro/claro
-        const toggleModo = document.getElementById('toggleModo');
-        if (toggleModo) {
-            if (localStorage.getItem('modoClaro') === '1') {
-                document.body.classList.add('modo-claro');
-                toggleModo.textContent = '☀️';
-            }
-            toggleModo.addEventListener('click', function() {
-                document.body.classList.toggle('modo-claro');
-                if (document.body.classList.contains('modo-claro')) {
-                    localStorage.setItem('modoClaro', '1');
-                    toggleModo.textContent = '☀️';
-                } else {
-                    localStorage.setItem('modoClaro', '0');
-                    toggleModo.textContent = '🌙';
-                }
-            });
+       <script>
+    // Modo oscuro/claro
+    const toggleModo = document.getElementById('toggleModo');
+    if (toggleModo) {
+        if (localStorage.getItem('modoClaro') === '1') {
+            document.body.classList.add('modo-claro');
+            toggleModo.textContent = '☀️';
         }
-    </script>
-</body>
-</html>
+        toggleModo.addEventListener('click', function() {
+            document.body.classList.toggle('modo-claro');
+            if (document.body.classList.contains('modo-claro')) {
+                localStorage.setItem('modoClaro', '1');
+                toggleModo.textContent = '☀️';
+            } else {
+                localStorage.setItem('modoClaro', '0');
+                toggleModo.textContent = '🌙';
+            }
+        });
+    }
+</script>
