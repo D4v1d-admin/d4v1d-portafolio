@@ -29,12 +29,14 @@
         <!-- Se llena con JavaScript -->
     </main>
 
-    <script>
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.key === 'PrintScreen') {
+        <script>
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
+        document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'PrintScreen' || (e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'p') || (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
                 e.preventDefault();
-                alert('🛡️ Las capturas de pantalla están deshabilitadas en este sitio.');
+                alert('🚫 Esta acción está deshabilitada para proteger el contenido.');
+                return false;
             }
         });
     </script>
