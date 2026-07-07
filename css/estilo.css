@@ -377,3 +377,13 @@ h1, h2, h3, p, a, span, label, strong {
         padding: 100px 15px 40px 15px;
     }
 }
+/* === AVATAR QUE PARPADEA === */
+@keyframes parpadeo {
+    0%, 90%, 94%, 98%, 100% { opacity: 1; }
+    92% { opacity: 0.2; }
+    96% { opacity: 0.1; }
+}
+
+.logo-img {
+    animation: parpadeo 6s infinite;
+}
