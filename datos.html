@@ -59,7 +59,7 @@
                     <p><strong>GitHub:</strong> <a href="${datos.github}" target="_blank">${datos.github}</a></p>
                     <p><strong>Habilidades:</strong> ${datos.habilidades.join(', ')}</p>
                     <p><strong>Bio:</strong> ${datos.biografia}</p>
-                    <p><strong>💰 Comisiones:</strong> <span style="color:${datos.comisiones === 'Abiertas' ? '#00ff00' : '#e63946'};">●</span> ${datos.comisiones}</p>
+                    <p><strong>💰 Comisiones:</strong> <span style="display:inline-block;width:16px;height:16px;border-radius:50%;background:${datos.comisiones === 'Abiertas' ? '#00ff00' : '#e63946'};box-shadow:0 0 10px ${datos.comisiones === 'Abiertas' ? '#00ff00' : '#e63946'};margin-right:6px;vertical-align:middle;"></span> <strong style="color:${datos.comisiones === 'Abiertas' ? '#00ff00' : '#e63946'};">${datos.comisiones.toUpperCase()}</strong></p>
                     <p><strong>💳 Métodos de pago:</strong> ${datos.metodos_pago.join(', ')}</p>
                     <p><strong>🔗 PayPal:</strong> <a href="${datos.paypal}" target="_blank">Pagar aquí</a></p>
                     <p><strong>💵 Precios:</strong> ${datos.precios}</p>
