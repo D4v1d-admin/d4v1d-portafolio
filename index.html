@@ -144,32 +144,70 @@
             }
         });
     </script>
-    <!-- Mini juego Snake -->
+<!-- Mini juego Snake -->
 <div class="juego-overlay" id="juegoOverlay">
     <span class="juego-cerrar" id="cerrarJuego">✕</span>
     <p class="juego-puntos">🐍 <span id="puntosSnake">0</span></p>
     <canvas id="snakeCanvas" width="400" height="400"></canvas>
+    <p style="color:#aaa;font-size:0.5rem;margin-top:8px;">Desliza para jugar</p>
 </div>
 
 <script>
-    // Activar juego con doble clic en el nombre
-        let clicksJuego = 0;
-    document.getElementById('avatarParpadeo').addEventListener('click', function() {
-        clicksJuego++;
-        if (clicksJuego >= 2) {
+    // --- Activación del juego ---
+    const avatar = document.getElementById('avatarParpadeo');
+    let pressTimer;
+    let isLongPress = false;
+
+    // Detectar "long press" (móvil / táctil)
+    avatar.addEventListener('touchstart', function(e) {
+        pressTimer = setTimeout(() => {
+            isLongPress = true;
             document.getElementById('juegoOverlay').classList.add('activo');
             iniciarSnake();
-            clicksJuego = 0;
-        }
-        setTimeout(() => { clicksJuego = 0; }, 600);
+        }, 1000); // 1 segundo
     });
 
+    avatar.addEventListener('touchend', function(e) {
+        clearTimeout(pressTimer);
+        // Si no fue long press, permitir doble toque como alternativa
+        if (!isLongPress) {
+            clicksJuego++;
+            if (clicksJuego >= 2) {
+                document.getElementById('juegoOverlay').classList.add('activo');
+                iniciarSnake();
+                clicksJuego = 0;
+            }
+            setTimeout(() => { clicksJuego = 0; }, 600);
+        }
+        isLongPress = false;
+    });
+
+    avatar.addEventListener('touchmove', function(e) {
+        clearTimeout(pressTimer); // cancelar si se mueve el dedo
+    });
+
+    // Doble clic en computadora (ratón)
+    let clicksJuego = 0;
+    avatar.addEventListener('click', function(e) {
+        // Solo contar clics de ratón reales (no touch)
+        if (e.pointerType === 'mouse' || e.pointerType === '') {
+            clicksJuego++;
+            if (clicksJuego >= 2) {
+                document.getElementById('juegoOverlay').classList.add('activo');
+                iniciarSnake();
+                clicksJuego = 0;
+            }
+            setTimeout(() => { clicksJuego = 0; }, 600);
+        }
+    });
+
+    // Cerrar juego
     document.getElementById('cerrarJuego').addEventListener('click', function() {
         document.getElementById('juegoOverlay').classList.remove('activo');
         clearInterval(intervaloSnake);
     });
 
-    // Juego Snake
+    // --- Juego Snake con control táctil ---
     let intervaloSnake;
     function iniciarSnake() {
         const canvas = document.getElementById('snakeCanvas');
@@ -187,19 +225,15 @@
             comida.y = Math.floor(Math.random() * (canvas.height / gridSize));
         }
 
-                dir = {x: 0, y: 0};
-        snake = [{x: 10, y: 10}];
-        puntos = 0;
-        document.getElementById('puntosSnake').textContent = '0';
-
         clearInterval(intervaloSnake);
         intervaloSnake = setInterval(() => {
             const cabeza = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
 
-                        if (dir.x === 0 && dir.y === 0) {
-                // No moverse, esperar primera tecla
+            if (dir.x === 0 && dir.y === 0) {
+                // quieto, esperando primer movimiento
             } else if (cabeza.x < 0 || cabeza.x >= canvas.width/gridSize || cabeza.y < 0 || cabeza.y >= canvas.height/gridSize || snake.some(s => s.x === cabeza.x && s.y === cabeza.y)) {
-                                ctx.fillStyle = '#e63946';
+                clearInterval(intervaloSnake);
+                ctx.fillStyle = '#e63946';
                 ctx.font = '16px "Press Start 2P"';
                 ctx.fillText('GAME OVER', 60, 180);
                 ctx.fillStyle = '#3b82f6';
@@ -212,6 +246,11 @@
                         document.removeEventListener('keydown', reiniciar);
                         iniciarSnake();
                     }
+                });
+                // También permitir reiniciar tocando la pantalla
+                canvas.addEventListener('click', function reiniciarTouch() {
+                    iniciarSnake();
+                    canvas.removeEventListener('click', reiniciarTouch);
                 });
                 return;
             }
@@ -232,6 +271,36 @@
             ctx.fillRect(comida.x * gridSize, comida.y * gridSize, gridSize - 2, gridSize - 2);
         }, 100);
 
+        // Control táctil (deslizamiento)
+        let touchStart = {x: 0, y: 0};
+        canvas.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            const t = e.touches[0];
+            touchStart = {x: t.clientX, y: t.clientY};
+        });
+
+        canvas.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+            if (!touchStart.x) return;
+            const t = e.touches[0];
+            const dx = t.clientX - touchStart.x;
+            const dy = t.clientY - touchStart.y;
+            const absDx = Math.abs(dx);
+            const absDy = Math.abs(dy);
+
+            if (absDx > absDy && absDx > 20) {
+                // horizontal
+                if (dx > 0 && dir.x === 0) { dir = {x: 1, y: 0}; }
+                else if (dx < 0 && dir.x === 0) { dir = {x: -1, y: 0}; }
+            } else if (absDy > absDx && absDy > 20) {
+                // vertical
+                if (dy > 0 && dir.y === 0) { dir = {x: 0, y: 1}; }
+                else if (dy < 0 && dir.y === 0) { dir = {x: 0, y: -1}; }
+            }
+            touchStart = {x: t.clientX, y: t.clientY}; // reset
+        });
+
+        // Teclado (escritorio)
         document.addEventListener('keydown', moverSerpiente);
         function moverSerpiente(e) {
             if (e.key === 'ArrowUp' && dir.y === 0) { dir = {x: 0, y: -1}; e.preventDefault(); }
