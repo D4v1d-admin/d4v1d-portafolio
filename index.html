@@ -38,7 +38,7 @@
 
     <script src="js/particulas.js"></script>
 
-    <!-- Botón secreto admin (adaptado a móvil) -->
+    <!-- Botón secreto admin -->
     <a href="admin.html" id="btnAdminSecreto" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background-color: transparent; z-index: 999; display: flex; align-items: center; justify-content: center; text-decoration: none; opacity: 0; transition: opacity 0.3s;" title="Admin">🔐</a>
 
     <!-- Botón volver arriba -->
@@ -65,7 +65,7 @@
             }, 500);
         });
 
-        // ========== PROTECCIÓN ANTI-COPIA ==========
+        // ========== PROTECCIÓN ==========
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; });
         document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; });
         document.addEventListener('keydown', function(e) {
@@ -79,17 +79,14 @@
         // ========== BOTÓN VOLVER ARRIBA ==========
         const btnVolver = document.getElementById('btnVolverArriba');
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 100) {
-                btnVolver.classList.add('visible');
-            } else {
-                btnVolver.classList.remove('visible');
-            }
+            if (window.scrollY > 100) btnVolver.classList.add('visible');
+            else btnVolver.classList.remove('visible');
         });
         btnVolver.addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // ========== CONTADOR DE VISITAS ==========
+        // ========== CONTADOR ==========
         function cargarContador() {
             let visitas = localStorage.getItem('visitasD4v1d');
             if (!visitas) visitas = 0;
@@ -104,23 +101,13 @@
         }
         cargarContador();
 
-        // ========== AVATAR PARPADEO (adaptado a móvil) ==========
+        // ========== AVATAR ==========
         const avatar = document.getElementById('avatarParpadeo');
         if (avatar) {
-            // En computadora: mouseenter/mouseleave
-            avatar.addEventListener('mouseenter', function() {
-                this.style.animation = 'none';
-            });
-            avatar.addEventListener('mouseleave', function() {
-                this.style.animation = 'parpadeo 6s infinite';
-            });
-            // En móvil: touchstart/touchend
-            avatar.addEventListener('touchstart', function() {
-                this.style.animation = 'none';
-            });
-            avatar.addEventListener('touchend', function() {
-                this.style.animation = 'parpadeo 6s infinite';
-            });
+            avatar.addEventListener('mouseenter', function() { this.style.animation = 'none'; });
+            avatar.addEventListener('mouseleave', function() { this.style.animation = 'parpadeo 6s infinite'; });
+            avatar.addEventListener('touchstart', function() { this.style.animation = 'none'; });
+            avatar.addEventListener('touchend', function() { this.style.animation = 'parpadeo 6s infinite'; });
         }
 
         // ========== MODO OSCURO/CLARO ==========
@@ -141,63 +128,53 @@
                 }
             });
         }
-<script>
-    // Easter egg – ↑↑ (escritorio) y triple toque en avatar (móvil)
-    let arribaPresionado = 0;
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowUp') {
-            arribaPresionado++;
-            if (arribaPresionado >= 2) {
-                mostrarMensajeEaster();
-                arribaPresionado = 0;
+
+        // ========== EASTER EGG ==========
+        let arribaPresionado = 0;
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowUp') {
+                arribaPresionado++;
+                if (arribaPresionado >= 2) {
+                    mostrarEasterEgg();
+                    arribaPresionado = 0;
+                }
+                setTimeout(() => { arribaPresionado = 0; }, 800);
             }
-            setTimeout(() => { arribaPresionado = 0; }, 800);
-        }
-    });
+        });
 
-    let toquesAvatar = 0;
-    avatar.addEventListener('click', function(e) {
-        // Solo contar toques reales (no el long press)
-        if (e.detail === 1 && !isLongPress) {
-            toquesAvatar++;
-            if (toquesAvatar >= 3) {
-                mostrarMensajeEaster();
-                toquesAvatar = 0;
+        let toquesAvatar = 0;
+        avatar.addEventListener('click', function(e) {
+            if (e.detail === 1) {
+                toquesAvatar++;
+                if (toquesAvatar >= 3) {
+                    mostrarEasterEgg();
+                    toquesAvatar = 0;
+                }
+                setTimeout(() => { toquesAvatar = 0; }, 1000);
             }
-            setTimeout(() => { toquesAvatar = 0; }, 1000);
+        });
+
+        function mostrarEasterEgg() {
+            const mensaje = document.createElement('div');
+            mensaje.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1a1a2e;border:3px solid #3b82f6;padding:30px;z-index:99999;text-align:center;font-family:"Press Start 2P",monospace;color:#3b82f6;font-size:1rem;box-shadow:0 0 50px rgba(59,130,246,0.8);';
+            mensaje.innerHTML = '👾<br>¡Bienvenido!<br><br>D4v1d te saluda<br>🎮';
+            document.body.appendChild(mensaje);
+            setTimeout(() => mensaje.remove(), 3000);
         }
-    });
 
-    function mostrarMensajeEaster() {
-        const mensaje = document.createElement('div');
-        mensaje.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1a1a2e;border:3px solid #3b82f6;padding:30px;z-index:99999;text-align:center;font-family:"Press Start 2P",monospace;color:#3b82f6;font-size:1rem;box-shadow:0 0 50px rgba(59,130,246,0.8);';
-        mensaje.innerHTML = '👾<br>¡Bienvenido!<br><br>D4v1d te saluda<br>🎮';
-        document.body.appendChild(mensaje);
-        setTimeout(() => mensaje.remove(), 3000);
-    }
-</script>
-
-        // ========== BOTÓN SECRETO ADMIN (adaptado a móvil) ==========
+        // ========== BOTÓN SECRETO ADMIN ==========
         const btnAdmin = document.getElementById('btnAdminSecreto');
         let adminTimer;
-        // En computadora: hover
         btnAdmin.addEventListener('mouseenter', function() { this.style.opacity = '1'; });
         btnAdmin.addEventListener('mouseleave', function() { this.style.opacity = '0'; });
-        // En móvil: toque prolongado en la esquina
         document.addEventListener('touchstart', function(e) {
             const touch = e.touches[0];
             if (touch.clientX > window.innerWidth - 70 && touch.clientY > window.innerHeight - 70) {
-                adminTimer = setTimeout(() => {
-                    btnAdmin.style.opacity = '1';
-                }, 1000);
+                adminTimer = setTimeout(() => { btnAdmin.style.opacity = '1'; }, 1000);
             }
         });
-        document.addEventListener('touchend', function() {
-            clearTimeout(adminTimer);
-        });
-        document.addEventListener('touchmove', function() {
-            clearTimeout(adminTimer);
-        });
+        document.addEventListener('touchend', function() { clearTimeout(adminTimer); });
+        document.addEventListener('touchmove', function() { clearTimeout(adminTimer); });
 
         // ========== MINI JUEGO SNAKE ==========
         const juegoOverlay = document.getElementById('juegoOverlay');
@@ -206,7 +183,6 @@
         let pressTimer;
         let isLongPress = false;
 
-        // Activación: long press (móvil)
         avatar.addEventListener('touchstart', function(e) {
             pressTimer = setTimeout(() => {
                 isLongPress = true;
@@ -229,11 +205,8 @@
             isLongPress = false;
         });
 
-        avatar.addEventListener('touchmove', function() {
-            clearTimeout(pressTimer);
-        });
+        avatar.addEventListener('touchmove', function() { clearTimeout(pressTimer); });
 
-        // Activación: doble clic (computadora)
         avatar.addEventListener('click', function(e) {
             if (e.pointerType === 'mouse' || (e.pointerType === '' && !e.touches)) {
                 clicksJuego++;
@@ -313,7 +286,6 @@
                 ctx.fillRect(comida.x * gridSize, comida.y * gridSize, gridSize - 2, gridSize - 2);
             }, 100);
 
-            // Control táctil
             let touchStart = {x: 0, y: 0};
             canvas.addEventListener('touchstart', function(e) {
                 e.preventDefault();
@@ -335,7 +307,6 @@
                 touchStart = {x: e.touches[0].clientX, y: e.touches[0].clientY};
             });
 
-            // Teclado
             document.addEventListener('keydown', function moverSerpiente(e) {
                 if (e.key === 'ArrowUp' && dir.y === 0) { dir = {x: 0, y: -1}; e.preventDefault(); }
                 if (e.key === 'ArrowDown' && dir.y === 0) { dir = {x: 0, y: 1}; e.preventDefault(); }
